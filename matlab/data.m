@@ -13,6 +13,8 @@ close all;
 COL_AROUSAL = 1;
 COL_VALENCE = 2;
 
+PLOT_GRAPHS = 0; % 1 yes, 0 no
+
 dataset = load("datasets/dataset.mat");
 % it can be useful for debugging in order to see the original dataset
 %original = dataset; 
@@ -48,22 +50,21 @@ fprintf(" %i outliers have been removed, %i samples remain\n", outliers_removed,
 % Let visualize the distribution for valence and arousal before the
 % balancing
 
-% Let divide output from input
-%features = dataset_cleaned(:,3:end);
-%target_arousal = dataset_cleaned(:,1);
-%target_valence = dataset_cleaned(:,2);
-
 % Now we count the classes for valence and for arousal
 howManySamplesForClass_arousal = groupcounts(dataset_cleaned(:,1));
 howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
 
-figure("Name", "Classes Distribution For Arousal Before Balancing");
-bar(howManySamplesForClass_arousal);
+if PLOT_GRAPHS==1
+    figure("Name", "Classes Distribution For Arousal Before Balancing");
+    bar(howManySamplesForClass_arousal);
+end
 [~, lowest_class_arousal] = min(howManySamplesForClass_arousal);
 [~, majority_class_arousal] = max(howManySamplesForClass_arousal);
 
-figure("Name", "Classes Distribution For Valence Before Balancing");
-bar(howManySamplesForClass_valence);
+if PLOT_GRAPHS==1
+    figure("Name", "Classes Distribution For Valence Before Balancing");
+    bar(howManySamplesForClass_valence);
+end
 [~, lowest_class_valence] = min(howManySamplesForClass_valence);
 [~, majority_class_valence] = max(howManySamplesForClass_valence);
 
@@ -153,13 +154,59 @@ disp(rowToRemove);
 dataset_cleaned(rowToRemove,:)=[];
 
 %% Plot of the histograms to check the balancing
-howManySamplesForClass_arousal = groupcounts(dataset_cleaned(:,1));
-howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
-figure("Name", "Classes Distribution For Arousal After Balancing");
-bar(howManySamplesForClass_arousal);
-figure("Name", "Classes Distribution For Valence After Balancing");
-bar(howManySamplesForClass_valence);
-
+if PLOT_GRAPHS==1
+    howManySamplesForClass_arousal = groupcounts(dataset_cleaned(:,1));
+    howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
+    figure("Name", "Classes Distribution For Arousal After Balancing");
+    bar(howManySamplesForClass_arousal);
+    figure("Name", "Classes Distribution For Valence After Balancing");
+    bar(howManySamplesForClass_valence);
+end
 %% Cross Validation and feature selection
 
+% Let divide output from input
+features = dataset_cleaned(:,3:end);
+target_arousal = dataset_cleaned(:,1);
+target_valence = dataset_cleaned(:,2);
 
+cv = cvpartition(target_arousal, 'Holdout', 0.3);
+%idxTrain = training(cv, i);
+%idxTest = test(cv, i);
+idxTrain = training(cv);
+idxTest = test(cv);
+
+x_train = features(idxTrain, :);
+y_train_aro = target_arousal(idxTrain, :);
+y_train_val = target_valence(idxTrain, :);
+
+x_test = features(idxTest, :);
+y_test_aro = target_arousal(idxTest, :);
+y_test_val = target_valence(idxTest, :);
+
+% continuare da qui in poi
+c_valence = cvpartition(y_train_val, 'k', 10);
+c_arousal = cvpartition(y_train_aro, 'k', 10);
+
+opts = statset('Display', 'iter');
+
+[features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', 2);
+disp(features_selected_for_valence);
+
+%[features_selected_for_arousal, history] = sequentialfs(@myfun, x_train, y_train_aro, 'cv', c_arousal, 'opt', opts, 'nfeatures', 8);
+%disp(features_selected_for_arousal);
+
+%% Custom function for sequentialfs
+function mse = myfun(xTrain, yTrain, xTest, yTest)
+    % create network
+    hiddenLayerSize = 20;
+    net = fitnet(hiddenLayerSize);
+    xx = xTrain';
+    tt = yTrain';
+    % train network
+    [net, ~] = train(net, xx, tt);
+    % test network
+    y = net(xx);
+    disp(net.performFcn);
+    disp(net.performParam);
+    mse = perform(net, tt, y);
+end
