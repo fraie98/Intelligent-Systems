@@ -15,11 +15,14 @@ COL_VALENCE = 2;
 % 1 yes (plot graphs), 0 no (do not plot)
 PLOT_GRAPHS = 0; 
 % Number of repetition for sequentialfs
-repetition_sequentialfs = 2; %20
+repetition_sequentialfs = 10; %10
 % Number of features of the original dataset
 HOW_MANY_FEATURES = 54;
 % Number of features that I will select
-FEATURES_TO_SELECT = 2;
+FEATURES_TO_SELECT = 10;
+% 0 if I do not want to save data (for testing)
+% 1 if I want to save data
+SAVE_DATA = 1;
 
 dataset = load("data/biomedical_signals/dataset.mat");
 % it can be useful for debugging in order to see the original dataset
@@ -45,7 +48,6 @@ dataset(:,1) = [];
 dataset(:,1) = [];
 
 % TODO qui è necessario fare delle prove e vedere il metodo migliore tra:
-% 'median', 'mean', 'quartiles', 'grubbs', 'gesd'
 [dataset_cleaned, ~] = rmoutliers(dataset);
 [row_survived, ~] = size(dataset_cleaned);
 [row_raw, ~] = size(dataset);
@@ -114,7 +116,7 @@ for k = 1:rep
             % Augmentation of the i-th row with 10 different factors
             row_to_add = row_original;
             %for j = 1:5
-                row_to_add(3:end) = row_original(3:end).*augmentation_factors(2); 
+                row_to_add(3:end) = row_original(3:end).*augmentation_factors(4); 
                 % Addition of the new sample, obtained through augmentation, to
                 % the dataset
                 dataset_cleaned = [dataset_cleaned; row_to_add];
@@ -250,32 +252,35 @@ disp(f_sel_arousal);
 
 
 %% Save the obtained data to file
-save('data/biomedical_signals/dataset_cleaned.mat','dataset_cleaned');
+if SAVE_DATA == 1
+    save('data/biomedical_signals/dataset_cleaned.mat','dataset_cleaned');
 
-% struct for training data
-training_data.x_train_arousal = x_train(:,f_sel_arousal);
-training_data.x_train_valence = x_train(:,f_sel_valence);
-training_data.y_train_arousal = y_train_aro;
-training_data.y_train_valence = y_train_val;
-save('data/biomedical_signals/training_data.mat', 'training_data');
+    % struct for training data
+    training_data.x_train_arousal = x_train(:,f_sel_arousal);
+    training_data.x_train_valence = x_train(:,f_sel_valence);
+    training_data.y_train_arousal = y_train_aro;
+    training_data.y_train_valence = y_train_val;
+    save('data/biomedical_signals/training_data.mat', 'training_data');
 
-% struct for test data
-test_data.x_test_arousal = x_test(:,f_sel_arousal);
-test_data.x_test_valence = x_test(:,f_sel_valence);
-test_data.y_test_arousal = y_test_aro;
-test_data.y_test_valence = y_test_val;
-save('data/biomedical_signals/test_data.mat', 'test_data');
-
-
+    % struct for test data
+    test_data.x_test_arousal = x_test(:,f_sel_arousal);
+    test_data.x_test_valence = x_test(:,f_sel_valence);
+    test_data.y_test_arousal = y_test_aro;
+    test_data.y_test_valence = y_test_val;
+    save('data/biomedical_signals/test_data.mat', 'test_data');
+    
+    disp(" DATA SAVED ");
+end
 %% Custom function for sequentialfs
 function mse = myfun(xTrain, yTrain, xTest, yTest)
     % create network
-    hiddenLayerSize = 20;
+    hiddenLayerSize = 40;
     net = fitnet(hiddenLayerSize);
     xx = xTrain';
     tt = yTrain';
     % train network
     [net, ~] = train(net, xx, tt);
+    %plotregression(tt, xx);
     % test network
     y = net(xx);
     mse = perform(net, tt, y);

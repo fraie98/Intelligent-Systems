@@ -157,7 +157,7 @@
 	\section{Features Selection}
 	\noindent Before the features selection is necessary to divide the data in two set: one for training and one for test. This is very important because if we use all the data to perform feature selection we have a bias because the test data have been already seen by the net.
 	
-	\noindent Thus after the extraction of the holdout partition we perform x CAMBIARE times \texttt{sequentialfs} for arousal and x time for valence.
+	\noindent Thus after the extraction of the holdout partition we perform x CAMBIARE times \texttt{sequentialfs} for arousal and x time for valence. Then we select the first \texttt{FEATURES\_TO\_SELECT} (constant set at the beginning of the script) features that appear most times in the different runs of sequentialfs, this operation is performed separately for arousal and valence.
 	
 	\noindent At the end we save the data obtained into three \texttt{.mat} files:
 	\begin{itemize}
@@ -173,7 +173,8 @@
 		\noindent It contains a \texttt{struct} with the test input (only the selected features) and the correspondent expected output.
 	\end{itemize}
 	
-	\chapter{Neural Networks}
+\chapter{Neural Networks}
+	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals.	
 	\section{Fitnet}
 	\section{RBF}
 	
