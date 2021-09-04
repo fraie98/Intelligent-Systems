@@ -1,9 +1,9 @@
-%% Preparation of the dataset
+%% Script for data preparation
 % In the following script the following steps are performed:
 % - Removal of non-numerical values
 % - Outliers Removal
 % - Dataset Balancing
-% .....
+% - Features Selection
 
 clc;
 clear;
@@ -12,10 +12,16 @@ close all;
 % constant valid after the removal of subject_id and video_id
 COL_AROUSAL = 1;
 COL_VALENCE = 2;
+% 1 yes (plot graphs), 0 no (do not plot)
+PLOT_GRAPHS = 0; 
+% Number of repetition for sequentialfs
+repetition_sequentialfs = 2; %20
+% Number of features of the original dataset
+HOW_MANY_FEATURES = 54;
+% Number of features that I will select
+FEATURES_TO_SELECT = 2;
 
-PLOT_GRAPHS = 0; % 1 yes, 0 no
-
-dataset = load("datasets/dataset.mat");
+dataset = load("data/biomedical_signals/dataset.mat");
 % it can be useful for debugging in order to see the original dataset
 %original = dataset; 
 dataset = table2array(dataset.dataset);
@@ -57,6 +63,7 @@ howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
 if PLOT_GRAPHS==1
     figure("Name", "Classes Distribution For Arousal Before Balancing");
     bar(howManySamplesForClass_arousal);
+    title("Classes Distribution For Arousal Before Balancing");
 end
 [~, lowest_class_arousal] = min(howManySamplesForClass_arousal);
 [~, majority_class_arousal] = max(howManySamplesForClass_arousal);
@@ -64,6 +71,7 @@ end
 if PLOT_GRAPHS==1
     figure("Name", "Classes Distribution For Valence Before Balancing");
     bar(howManySamplesForClass_valence);
+    title("Classes Distribution For Valence Before Balancing");
 end
 [~, lowest_class_valence] = min(howManySamplesForClass_valence);
 [~, majority_class_valence] = max(howManySamplesForClass_valence);
@@ -159,8 +167,10 @@ if PLOT_GRAPHS==1
     howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
     figure("Name", "Classes Distribution For Arousal After Balancing");
     bar(howManySamplesForClass_arousal);
+    title("Classes Distribution For Arousal After Balancing");
     figure("Name", "Classes Distribution For Valence After Balancing");
     bar(howManySamplesForClass_valence);
+    title("Classes Distribution For Valence After Balancing");
 end
 %% Cross Validation and feature selection
 
@@ -170,8 +180,6 @@ target_arousal = dataset_cleaned(:,1);
 target_valence = dataset_cleaned(:,2);
 
 cv = cvpartition(target_arousal, 'Holdout', 0.3);
-%idxTrain = training(cv, i);
-%idxTest = test(cv, i);
 idxTrain = training(cv);
 idxTest = test(cv);
 
@@ -183,17 +191,81 @@ x_test = features(idxTest, :);
 y_test_aro = target_arousal(idxTest, :);
 y_test_val = target_valence(idxTest, :);
 
-% continuare da qui in poi
-c_valence = cvpartition(y_train_val, 'k', 10);
-c_arousal = cvpartition(y_train_aro, 'k', 10);
+% Feature Selection For Valence
+counter_feat_sel_valence = zeros(HOW_MANY_FEATURES,1)';
+for i = 1:repetition_sequentialfs
+    fprintf(" Sequentialfs for valence: repetion %i\n",i);
+    c_valence = cvpartition(y_train_val, 'k', 10);
+    opts = statset('Display', 'iter','UseParallel',true);
+    [features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
+    
+    for j = 1:HOW_MANY_FEATURES
+        if features_selected_for_valence(j) == 1
+            counter_feat_sel_valence(j) = counter_feat_sel_valence(j) + 1;
+        end
+    end
 
-opts = statset('Display', 'iter');
+end
 
-[features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', 2);
-disp(features_selected_for_valence);
+f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
+for i = 1:FEATURES_TO_SELECT
+    % I find the maximum
+    [~,f_sel_valence(i)] = max(counter_feat_sel_valence);
+    % I set the maximum to zero, thus at the next iteration the second
+    % maximum value will be selected
+    counter_feat_sel_valence(f_sel_valence(i)) = 0;
+end
 
-%[features_selected_for_arousal, history] = sequentialfs(@myfun, x_train, y_train_aro, 'cv', c_arousal, 'opt', opts, 'nfeatures', 8);
-%disp(features_selected_for_arousal);
+fprintf(" Features Selected For Valence:");
+disp(f_sel_valence);
+
+
+% Features Selection For Arousal
+counter_feat_sel_arousal = zeros(HOW_MANY_FEATURES,1)';
+for i = 1:repetition_sequentialfs
+    fprintf(" Sequentialfs for arousal: repetion %i\n",i);
+    c_arousal = cvpartition(y_train_aro, 'k', 10);
+    opts = statset('Display', 'iter','UseParallel',true);
+    [features_selected_for_arousal, history] = sequentialfs(@myfun, x_train, y_train_aro, 'cv', c_arousal, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
+    
+    for j = 1:HOW_MANY_FEATURES
+        if features_selected_for_arousal(j) == 1
+            counter_feat_sel_arousal(j) = counter_feat_sel_arousal(j) + 1;
+        end
+    end
+
+end
+
+f_sel_arousal = zeros(FEATURES_TO_SELECT, 1)';
+for i = 1:FEATURES_TO_SELECT
+    % I find the maximum
+    [~,f_sel_arousal(i)] = max(counter_feat_sel_arousal);
+    % I set the maximum to zero, thus at the next iteration the second
+    % maximum value will be selected
+    counter_feat_sel_arousal(f_sel_arousal(i)) = 0;
+end
+
+fprintf(" Features Selected For Arousal");
+disp(f_sel_arousal);
+
+
+%% Save the obtained data to file
+save('data/biomedical_signals/dataset_cleaned.mat','dataset_cleaned');
+
+% struct for training data
+training_data.x_train_arousal = x_train(:,f_sel_arousal);
+training_data.x_train_valence = x_train(:,f_sel_valence);
+training_data.y_train_arousal = y_train_aro;
+training_data.y_train_valence = y_train_val;
+save('data/biomedical_signals/training_data.mat', 'training_data');
+
+% struct for test data
+test_data.x_test_arousal = x_test(:,f_sel_arousal);
+test_data.x_test_valence = x_test(:,f_sel_valence);
+test_data.y_test_arousal = y_test_aro;
+test_data.y_test_valence = y_test_val;
+save('data/biomedical_signals/test_data.mat', 'test_data');
+
 
 %% Custom function for sequentialfs
 function mse = myfun(xTrain, yTrain, xTest, yTest)
@@ -206,7 +278,5 @@ function mse = myfun(xTrain, yTrain, xTest, yTest)
     [net, ~] = train(net, xx, tt);
     % test network
     y = net(xx);
-    disp(net.performFcn);
-    disp(net.performParam);
     mse = perform(net, tt, y);
 end
