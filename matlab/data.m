@@ -13,13 +13,13 @@ close all;
 COL_AROUSAL = 1;
 COL_VALENCE = 2;
 % 1 yes (plot graphs), 0 no (do not plot)
-PLOT_GRAPHS = 0; 
+PLOT_GRAPHS = 1; 
 % Number of repetition for sequentialfs
-repetition_sequentialfs = 10; %10
+repetition_sequentialfs = 5; %10
 % Number of features of the original dataset
 HOW_MANY_FEATURES = 54;
 % Number of features that I will select
-FEATURES_TO_SELECT = 10;
+FEATURES_TO_SELECT = 8;
 % 0 if I do not want to save data (for testing)
 % 1 if I want to save data
 SAVE_DATA = 1;
@@ -78,7 +78,8 @@ end
 [~, lowest_class_valence] = min(howManySamplesForClass_valence);
 [~, majority_class_valence] = max(howManySamplesForClass_valence);
 
-augmentation_factors = [0.95 0.96 0.97 0.98 0.99 1.01 1.02 1.03 1.04 1.05];
+%augmentation_factors = [0.95 0.96 0.97 0.98 0.99 1.01 1.02 1.03 1.04 1.05];
+augmentation_factors = [0 0];
 
 debug = dataset_cleaned;
 possible_values = [1 2.333333333333333 3.666666666666667 5 6.333333333333333 7.666666666666667 9];
@@ -105,8 +106,9 @@ possible_values(7) = debug(27,1);
 %
 % I repeat this two steps rep (i.e. 40) times and for each repetition I
 % compute the new majority and minority classe both for arousal and valence
-rep = 40;
+rep = 80; %40 (metodo1) poi 50 (metodo2)
 row_to_check = row_survived;
+
 for k = 1:rep
     for i = 1:row_to_check
         if (dataset_cleaned(i,1)==possible_values(lowest_class_arousal) && dataset_cleaned(i,2)~=possible_values(majority_class_valence)) || (dataset_cleaned(i,1)~=possible_values(majority_class_arousal) && dataset_cleaned(i,2)==possible_values(lowest_class_valence))
@@ -115,18 +117,23 @@ for k = 1:rep
             row_original = dataset_cleaned(i,:);
             % Augmentation of the i-th row with 10 different factors
             row_to_add = row_original;
-            %for j = 1:5
-                row_to_add(3:end) = row_original(3:end).*augmentation_factors(4); 
-                % Addition of the new sample, obtained through augmentation, to
-                % the dataset
-                dataset_cleaned = [dataset_cleaned; row_to_add];
-                %row_to_check = row_to_check +1;
-            %end
+            
+            augmentation_factors(1) = 0.95+(0.04)*rand;
+            augmentation_factors(2) = 1.01+(0.04)*rand;
+            j = round(0.51+(1.98)*rand);
+            disp(j);
+            row_to_add(3:end) = row_original(3:end).*augmentation_factors(j); 
+            % Addition of the new sample, obtained through augmentation, to
+            % the dataset
+            dataset_cleaned = [dataset_cleaned; row_to_add];
+            %row_to_check = row_to_check +1;
+            
         end
         
         if((dataset_cleaned(i,1)==possible_values(majority_class_arousal) && dataset_cleaned(i,2)~=possible_values(lowest_class_valence)) || (dataset_cleaned(i,2)==possible_values(majority_class_valence) && dataset_cleaned(i,1)~=possible_values(lowest_class_arousal)))
             dataset_cleaned(i,:)=[];
-            row_to_check = row_to_check - 1;
+            % uncomment la riga successiva per risultato "buono" i.e. metodo 1 - ATTENZIONEEEEEE
+            %row_to_check = row_to_check - 1;
             fprintf(" Sto eliminando la riga %i\n",i);
         end
     end
@@ -139,22 +146,25 @@ for k = 1:rep
 
     [~, lowest_class_valence] = min(howManySamplesForClass_valence);
     [~, majority_class_valence] = max(howManySamplesForClass_valence);
+    
 end
 
 % Undersample on class 1 (for valence) because experiments prove that the
 % previous algorithm create a distribution in which the first class has too
 % many samples
 [row_to_check, ~] = size(dataset_cleaned);
-howManyToDelete = 30;
-deleted = 0;              
+howManyToDelete = 110; %30
+deleted = 0;
+classToUndersample = 7; %1 ATTENZIOEEE
 % In the following loop I set to 0 the rows which correspond to samples
 % that have a valence class equal to 1
 for i = 1:row_to_check
     %DEBUG fprintf("%i> %d is %d ?\n", i, dataset_cleaned(i,COL_VALENCE), possible_values(1));
-    if dataset_cleaned(i,COL_VALENCE)==possible_values(1) && deleted<howManyToDelete
+    if dataset_cleaned(i,COL_VALENCE)==possible_values(classToUndersample) && deleted<howManyToDelete 
         % DEBUGfprintf(" write to Remove row %i\n",i);
-        dataset_cleaned(i,:) = 0;
-        deleted = deleted + 1;
+        % Decommentare le due righe successive per risultato "buono" i.e. metodo 1 e/o 2  -  ATTENZIONEEEEEEEEEE
+        %dataset_cleaned(i,:) = 0;
+        %deleted = deleted + 1;
     end
 end
 
@@ -212,7 +222,8 @@ end
 f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
 for i = 1:FEATURES_TO_SELECT
     % I find the maximum
-    [~,f_sel_valence(i)] = max(counter_feat_sel_valence);
+    [~, f_sel_valence(i)] = max(counter_feat_sel_valence);
+    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_valence(f_sel_valence(i)), f_sel_valence(i)); 
     % I set the maximum to zero, thus at the next iteration the second
     % maximum value will be selected
     counter_feat_sel_valence(f_sel_valence(i)) = 0;
@@ -221,34 +232,37 @@ end
 fprintf(" Features Selected For Valence:");
 disp(f_sel_valence);
 
-
+%Per tempo fatta solo valence decommentare tutta la parte successiva per
+%fare anche l'arousal e ricordarsi di decommentare la parte relativa al
+%salvataggio
 % Features Selection For Arousal
-counter_feat_sel_arousal = zeros(HOW_MANY_FEATURES,1)';
-for i = 1:repetition_sequentialfs
-    fprintf(" Sequentialfs for arousal: repetion %i\n",i);
-    c_arousal = cvpartition(y_train_aro, 'k', 10);
-    opts = statset('Display', 'iter','UseParallel',true);
-    [features_selected_for_arousal, history] = sequentialfs(@myfun, x_train, y_train_aro, 'cv', c_arousal, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
+%counter_feat_sel_arousal = zeros(HOW_MANY_FEATURES,1)';
+%for i = 1:repetition_sequentialfs
+%    fprintf(" Sequentialfs for arousal: repetion %i\n",i);
+%    c_arousal = cvpartition(y_train_aro, 'k', 10);
+%    opts = statset('Display', 'iter','UseParallel',true);
+%    [features_selected_for_arousal, history] = sequentialfs(@myfun, x_train, y_train_aro, 'cv', c_arousal, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
     
-    for j = 1:HOW_MANY_FEATURES
-        if features_selected_for_arousal(j) == 1
-            counter_feat_sel_arousal(j) = counter_feat_sel_arousal(j) + 1;
-        end
-    end
+%    for j = 1:HOW_MANY_FEATURES
+%        if features_selected_for_arousal(j) == 1
+%            counter_feat_sel_arousal(j) = counter_feat_sel_arousal(j) + 1;
+%        end
+%    end
 
-end
+%end
 
-f_sel_arousal = zeros(FEATURES_TO_SELECT, 1)';
-for i = 1:FEATURES_TO_SELECT
+%f_sel_arousal = zeros(FEATURES_TO_SELECT, 1)';
+%for i = 1:FEATURES_TO_SELECT
     % I find the maximum
-    [~,f_sel_arousal(i)] = max(counter_feat_sel_arousal);
+%    [~,f_sel_arousal(i)] = max(counter_feat_sel_arousal);
+%    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_arousal(f_sel_arousal(i)), f_sel_arousal(i)); 
     % I set the maximum to zero, thus at the next iteration the second
     % maximum value will be selected
-    counter_feat_sel_arousal(f_sel_arousal(i)) = 0;
-end
+%    counter_feat_sel_arousal(f_sel_arousal(i)) = 0;
+%end
 
-fprintf(" Features Selected For Arousal");
-disp(f_sel_arousal);
+%fprintf(" Features Selected For Arousal");
+%disp(f_sel_arousal);
 
 
 %% Save the obtained data to file
@@ -256,16 +270,16 @@ if SAVE_DATA == 1
     save('data/biomedical_signals/dataset_cleaned.mat','dataset_cleaned');
 
     % struct for training data
-    training_data.x_train_arousal = x_train(:,f_sel_arousal);
+    %training_data.x_train_arousal = x_train(:,f_sel_arousal);
     training_data.x_train_valence = x_train(:,f_sel_valence);
-    training_data.y_train_arousal = y_train_aro;
+    %training_data.y_train_arousal = y_train_aro;
     training_data.y_train_valence = y_train_val;
     save('data/biomedical_signals/training_data.mat', 'training_data');
 
     % struct for test data
-    test_data.x_test_arousal = x_test(:,f_sel_arousal);
+    %test_data.x_test_arousal = x_test(:,f_sel_arousal);
     test_data.x_test_valence = x_test(:,f_sel_valence);
-    test_data.y_test_arousal = y_test_aro;
+    %test_data.y_test_arousal = y_test_aro;
     test_data.y_test_valence = y_test_val;
     save('data/biomedical_signals/test_data.mat', 'test_data');
     
@@ -279,7 +293,7 @@ function mse = myfun(xTrain, yTrain, xTest, yTest)
     xx = xTrain';
     tt = yTrain';
     % train network
-    [net, ~] = train(net, xx, tt);
+    [net, ~] = train(net, xx, tt);%, 'useParallel', 'yes');
     %plotregression(tt, xx);
     % test network
     y = net(xx);
