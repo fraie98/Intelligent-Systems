@@ -21,12 +21,12 @@ img_data = imageDatastore('data/img_4classes', ...
     'IncludeSubfolders',true, ...
     'LabelSource','foldernames');
  
-% 70 per training e 30 per validation
-[img_data_train, img_data_validation] = splitEachLabel(img_data, 0.7, 'randomized');
+% 70 per training, 20 per validation, 10 per test
+[img_data_train, img_data_valtest] = splitEachLabel(img_data, 0.7, 'randomized');
+[img_data_validation, img_data_test] = splitEachLabel(img_data, 0.2, 'randomized');
 
 %% Load and modify alexnet
 net = alexnet;
-%analyzeNetwork(net);
 
 input_size = net.Layers(1).InputSize;
 
@@ -45,7 +45,7 @@ net_layers = [
     fullyConnectedLayer(numberOfClasses,'WeightLearnRateFactor',20,'BiasLearnRateFactor',20)
     softmaxLayer
     classificationLayer];
-
+%20
 %% Network Training
 pixelRange = [-30 30];
 imageAugmenter = imageDataAugmenter( ...
@@ -57,11 +57,12 @@ imageAugmenter = imageDataAugmenter( ...
 % the input image size of alexnet that is 227x227x3
 augmented_image_data_train = augmentedImageDatastore(input_size(1:2), img_data_train, 'DataAugmentation', imageAugmenter);
 augmented_image_data_validation = augmentedImageDatastore(input_size(1:2), img_data_validation);
+augmented_image_data_test = augmentedImageDatastore(input_size(1:2), img_data_test);
 
 % Training options
 training_options = trainingOptions('sgdm', ...
     'MiniBatchSize', 10, ...
-    'MaxEpochs', 6, ...
+    'MaxEpochs', 10, ...
     'InitialLearnRate', 1e-4, ...
     'Shuffle', 'every-epoch', ...
     'ValidationData',augmented_image_data_validation, ...
@@ -73,8 +74,13 @@ training_options = trainingOptions('sgdm', ...
 new_CNN = trainNetwork(augmented_image_data_train, net_layers, training_options);
 
 %% Network Testing
-% Classification of the validation images
+% Classification of the test images
+[y, scores] = classify(new_CNN, augmented_image_data_test);
+t = img_data_test.Labels;
 
-[y, scores] = classify(new_CNN, augmented_image_data_validation);
-t = img_data_validation.Labels;
-accuracy = mean(y==t);
+correctClassified = find(y==t);
+[total,~] = size(t);
+[correcClassifiedNum,~] = size(correctClassified);
+accuracy = (correcClassifiedNum/total)*100;
+fprintf(" Testing Accuracy: %f \n",accuracy);
+plotconfusion(t, y);
