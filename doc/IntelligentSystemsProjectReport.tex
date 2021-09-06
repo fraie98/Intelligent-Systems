@@ -103,7 +103,9 @@
 	\noindent The dataset at our disposal are two, one for tasks \textit{3.1} and \textit{3.3} and another one for task \textit{4.2}.
 	\noindent For what concern the first dataset, i.e. the one with biomedical signals for estimate arousal and valence, it is important to perform a cleaning of the data in order to obtain better performance for the neural networks that will be trained on it. This process, which is performed by the script \texttt{/matlab/data.m} is explained in the \autoref{chap: dataCleaning}. 
 	
-	\noindent After this chapter for each task is dedicated a chapter in which are explained the choices done and the results obtained in terms of performance.
+	\noindent Instead for the second dataset the selection modalities are discussed in the \autoref{chap: CNN}.
+	
+	\noindent After \autoref{chap: dataCleaning}, for each task is dedicated a chapter in which are explained the choices done and the results obtained in terms of performance.
 	
 \chapter{Data Cleaning}
 	\label{chap: dataCleaning}
@@ -156,9 +158,8 @@
 	 samples that belong to the majority class of valence and don't belong to
 	 the minority class of arousal).
 	
-	 \item I repeat steps 1 and 2 for a $n=40$ ($40$ after some experiments this is the number that gives the best results) times and for each repetition I compute the new majority and minority class both for arousal and valence.
+	 \item I repeat steps 1 and 2 for a $n=80$ ($80$ after some experiments this is the number that gives the best results) times and for each repetition I compute the new majority and minority class both for arousal and valence.
 	 
-	 \item After the end of the repetitions I perform an undersampling on the first class because it is unbalanced for what concern the valence. Thus I remove some samples from this class, after some experiments removing $30$ samples results in a balanced distribution for both arousal and valence.
 \end{enumerate}
 
 \noindent At the end of this procedure the data are balanced as we can see in figure \ref{afterBalancingArousal} and \ref{afterBalancingValence}.
@@ -178,23 +179,36 @@
 	\end{figure}
 	
 	\section{Features Selection}
-	\noindent Before the features selection is necessary to divide the data in two set: one for training and one for test. This is very important because if we use all the data to perform feature selection we have a bias because the test data have been already seen by the net.
+	\noindent Before the features selection is necessary to divide the data in two set: one for training and one for test. This is very important because if we use all the data to perform feature selection we have a bias because the test data have been already seen by the network.
 	
-	\noindent Thus after the extraction of the holdout partition we perform x CAMBIARE times \texttt{sequentialfs} for arousal and x time for valence. Then we select the first \texttt{FEATURES\_TO\_SELECT} (constant set at the beginning of the script) features that appear most times in the different runs of sequentialfs, this operation is performed separately for arousal and valence.
+	\noindent Thus after the extraction of the holdout partition we perform 5 times the \texttt{sequentialfs} for arousal and 5 times for valence. Then we select the first \texttt{FEATURES\_TO\_SELECT} (constant set at the beginning of the script that is 8) features that appear most times in the different runs of sequentialfs, this operation is performed separately for arousal and valence.
 	
-	\noindent At the end we save the data obtained into three \texttt{.mat} files:
+	\noindent It's important to underline the fact that \texttt{sequentialfs} should be repeated a statistically relevant number of times, thus 5 repetitions are not a statistically relevant number of time, anyway is the compromise done in order to maintain an acceptable number of features, an acceptable quality of data and an acceptable time needed for the algorithm (9 hours for valence and 9 hours for arousal with the hardware at disposal).
+	
+	\noindent At the end we save the data obtained into five \texttt{.mat} files:
 	\begin{itemize}
 		\item \texttt{/matlab/data/biomedical\_signals/dataset\_cleaned.mat}
 		
 		\noindent It contains the entire dataset without infinite values, outliers and with balanced class distribution.
-		\item \texttt{/matlab/data/biomedical\_signals/training\_data.mat}
 		
-		\noindent It contains a \texttt{struct} with the training input (only the selected features) and the correspondent target output.
+		\item \texttt{/matlab/data/biomedical\_signals/training\_data\_valence.mat}
 		
-		\item \texttt{/matlab/data/biomedical\_signals/test\_data.mat}
+		\noindent It contains a \texttt{struct} with the training input (only the selected features) and the correspondent target output for valence.
 		
-		\noindent It contains a \texttt{struct} with the test input (only the selected features) and the correspondent expected output.
+		\item \texttt{/matlab/data/biomedical\_signals/training\_data\_arousal.mat}
+		
+		\noindent It contains a \texttt{struct} with the training input (only the selected features) and the correspondent target output for arousal.
+		
+		\item \texttt{/matlab/data/biomedical\_signals/test\_data\_arousal.mat}
+		
+		\noindent It contains a \texttt{struct} with the test input (only the selected features) and the correspondent expected output for arousal.
+		
+		\item \texttt{/matlab/data/biomedical\_signals/test\_data\_valence.mat}
+		
+		\noindent It contains a \texttt{struct} with the test input (only the selected features) and the correspondent expected output for valence.
 	\end{itemize}
+
+	\noindent The division of training data and test data in two files, one for valence and one for arousal, is done only for practical reasons, in fact the repetitions of sequentialfs has been performed only for arousal and only for valence separately due to the time needed.
 	
 \chapter{Neural Networks}
 	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals.	
@@ -204,6 +218,7 @@
 	\chapter{Fuzzy Inference System}
 	
 \chapter{Convolutional Neural Networks}
+\label{chap: CNN}
 	\noindent In this chapter is discussed the development and the training of a CNN based on the pre-trained AlexNet which has the aim of classifying facial expressions. The possible classes are four:
 	\begin{itemize}
 		\item Happiness
