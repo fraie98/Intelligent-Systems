@@ -181,4 +181,59 @@
 	\chapter{Fuzzy Inference System}
 	
 	\chapter{Convolutional Neural Networks}
+	\noindent In this chapter the development and training of a CNN based on the pre-trained Alexnet which has the aim of classifying facial expressions. The possible classes are four:
+	\begin{itemize}
+		\item Happiness
+		\item Anger
+		\item Disgust
+		\item Fear
+	\end{itemize} 
+	\noindent Two CNN have been developed (both are based on Alexnet). The first one is able to classify images in two classes (happiness and anger), instead the second one is able to classify images in all four classes.
+	
+	\section{CNN Two Classes Classification Problem}
+	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_2classes.m}. Due to the fact that the images of happiness and the ones for anger are very different we are able to obtain good result (accuracy equal to 82.67\%) without a proper selection of the images.
+	\noindent In fact as first experiment 500 images for each class are selected at random from the dataset. This experiment return the results shown in figure \ref{img: trainingCnnTwoClasses}:
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.31]{img/trainingCnnTwoClasses.png}
+		\caption{First experiment: no images selection}
+		\label{img: trainingCnnTwoClasses}
+	\end{figure}
+
+	\noindent Then a selection of the images has been performed and from the 500 images only 300 have been selected. The selection consist in the removal of the images with ambigous facial expressions. After this selection the results in figure \ref{img: trainingCnnTwoClassesAfterSelection}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.31]{img/trainingCnnTwoClasses_afterSelection.png}
+		\caption{First experiment: no images selection}
+		\label{img: trainingCnnTwoClassesAfterSelection}
+	\end{figure}
+
+	\noindent Thanks to the selection of the images the accuracy has increased by $\approx 6\%$: from 82.67\% to 88.33\%.
+	 
+	\section{CNN Four Classes Classification Problem}
+	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_4classes.m}. As in the previous case two experiments have been performed, the first one with 500 images per class selected at random, the second one with 300 images selected removing the images classified wrong or with ambiguous facial expressions.
+	
+	\noindent The result for the experiments are respectively in the figures \ref{img: trainingCnnFourClasses} and \ref{img: trainingCnnFourClassesAfterSelection}.
+	
+	\noindent Analyzing the two results it is possible to see that, thanks to the selection, we have improved the accuracy from 58.17\% to 63.61\% that can be considered a reasonable result for a classification problem with 4 classes.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.31]{img/trainingCnnFourClasses.png}
+		\caption{First experiment: no images selection}
+		\label{img: trainingCnnFourClasses}
+	\end{figure}
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.31]{img/trainingCnnFourClasses_afterSelection.png}
+		\caption{Second experiment: after images selection}
+		\label{img: trainingCnnFourClassesAfterSelection}
+	\end{figure}
+	
+
+	
+	\section{Design Choices}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  4 SEP 2021 15:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  6 SEP 2021 17:13
 entering extended mode
 **./IntelligentSystemsProjectReport.tex
 (IntelligentSystemsProjectReport.tex
@@ -552,7 +552,7 @@ LaTeX Info: Redefining \nameref on input line 30.
 \@outlinefile=\write3
 \openout3 = `IntelligentSystemsProjectReport.out'.
 
-<img/unipi.png, id=35, 1204.5pt x 1229.59375pt>
+<img/unipi.png, id=47, 1204.5pt x 1229.59375pt>
 File: img/unipi.png Graphic file (type png)
 <use img/unipi.png>
 Package pdftex.def Info: img/unipi.png  used on input line 35.
@@ -590,13 +590,13 @@ Chapter 1.
 [3
 
 ]
-<img/beforeBalancingArousal.png, id=81, 421.575pt x 316.18124pt>
+<img/beforeBalancingArousal.png, id=96, 421.575pt x 316.18124pt>
 File: img/beforeBalancingArousal.png Graphic file (type png)
 <use img/beforeBalancingArousal.png>
 Package pdftex.def Info: img/beforeBalancingArousal.png  used on input line 109
 .
 (pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
-<img/beforeBalancingValence.png, id=82, 421.575pt x 316.18124pt>
+<img/beforeBalancingValence.png, id=97, 421.575pt x 316.18124pt>
 File: img/beforeBalancingValence.png Graphic file (type png)
 <use img/beforeBalancingValence.png>
 Package pdftex.def Info: img/beforeBalancingValence.png  used on input line 116
@@ -604,13 +604,13 @@ Package pdftex.def Info: img/beforeBalancingValence.png  used on input line 116
 (pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
  [4 <./img/beforeBalancingArousal.png (PNG copy)> <./img/beforeBalancingValence
 .png (PNG copy)>]
-<img/afterBalancingArousal.png, id=93, 421.575pt x 316.18124pt>
+<img/afterBalancingArousal.png, id=108, 421.575pt x 316.18124pt>
 File: img/afterBalancingArousal.png Graphic file (type png)
 <use img/afterBalancingArousal.png>
 Package pdftex.def Info: img/afterBalancingArousal.png  used on input line 145.
 
 (pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
-<img/afterBalancingValence.png, id=94, 421.575pt x 316.18124pt>
+<img/afterBalancingValence.png, id=109, 421.575pt x 316.18124pt>
 File: img/afterBalancingValence.png Graphic file (type png)
 <use img/afterBalancingValence.png>
 Package pdftex.def Info: img/afterBalancingValence.png  used on input line 152.
@@ -633,18 +633,47 @@ Chapter 3.
 
 ]
 Chapter 4.
+<img/trainingCnnTwoClasses.png, id=133, 1294.8375pt x 685.8122pt>
+File: img/trainingCnnTwoClasses.png Graphic file (type png)
+<use img/trainingCnnTwoClasses.png>
+Package pdftex.def Info: img/trainingCnnTwoClasses.png  used on input line 199.
+
+(pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
+<img/trainingCnnTwoClasses_afterSelection.png, id=135, 1294.8375pt x 685.8122pt
+>
+File: img/trainingCnnTwoClasses_afterSelection.png Graphic file (type png)
+<use img/trainingCnnTwoClasses_afterSelection.png>
+Package pdftex.def Info: img/trainingCnnTwoClasses_afterSelection.png  used on 
+input line 208.
+(pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
 [9
 
-] (IntelligentSystemsProjectReport.aux)
+ <./img/trainingCnnTwoClasses.png>]
+<img/trainingCnnFourClasses.png, id=145, 1294.8375pt x 685.8122pt>
+File: img/trainingCnnFourClasses.png Graphic file (type png)
+<use img/trainingCnnFourClasses.png>
+Package pdftex.def Info: img/trainingCnnFourClasses.png  used on input line 224
+.
+(pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
+<img/trainingCnnFourClasses_afterSelection.png, id=146, 1294.8375pt x 685.8122p
+t>
+File: img/trainingCnnFourClasses_afterSelection.png Graphic file (type png)
+<use img/trainingCnnFourClasses_afterSelection.png>
+Package pdftex.def Info: img/trainingCnnFourClasses_afterSelection.png  used on
+ input line 231.
+(pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
+ [10 <./img/trainingCnnTwoClasses_afterSelection.png> <./img/trainingCnnFourCla
+sses.png>] [11 <./img/trainingCnnFourClasses_afterSelection.png>] (IntelligentS
+ystemsProjectReport.aux)
 Package rerunfilecheck Info: File `IntelligentSystemsProjectReport.out' has not
  changed.
-(rerunfilecheck)             Checksum: F876B331DB5DE7CC6112941D48D5A4FD;1012.
+(rerunfilecheck)             Checksum: DCE21FC2BE1944B7785782F8A943831A;1658.
  ) 
 Here is how much of TeX's memory you used:
- 13048 strings out of 479173
- 203787 string characters out of 2854167
- 612569 words of memory out of 3000000
- 30456 multiletter control sequences out of 15000+600000
+ 13092 strings out of 479173
+ 205224 string characters out of 2854167
+ 612862 words of memory out of 3000000
+ 30487 multiletter control sequences out of 15000+600000
  414509 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,7n,79p,600b,418s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -665,10 +694,10 @@ sers/franc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.
 pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmr10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmsy10.pfb>
-Output written on IntelligentSystemsProjectReport.pdf (10 pages, 377597 bytes).
-
+Output written on IntelligentSystemsProjectReport.pdf (12 pages, 1061952 bytes)
+.
 PDF statistics:
- 422 PDF objects out of 1000 (max. 8388607)
- 28 named destinations out of 1000 (max. 500000)
- 90 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 481 PDF objects out of 1000 (max. 8388607)
+ 37 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 

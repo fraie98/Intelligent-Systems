@@ -7,3 +7,6 @@
 \contentsline {section}{\numberline {2.2}RBF}{7}{section.2.2}%
 \contentsline {chapter}{\numberline {3}Fuzzy Inference System}{8}{chapter.3}%
 \contentsline {chapter}{\numberline {4}Convolutional Neural Networks}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}CNN Two Classes Classification Problem}{9}{section.4.1}%
+\contentsline {section}{\numberline {4.2}CNN Four Classes Classification Problem}{10}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Design Choices}{11}{section.4.3}%
