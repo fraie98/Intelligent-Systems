@@ -90,17 +90,17 @@
 	
 	\tableofcontents
 	
-	\chapter*{Introduction}
+\chapter*{Introduction}
 	The tasks performed in this project are the following:
 	\begin{itemize}
 		\item \textit{3.1} "Design and develop two MLP artificial neural networks that accurately estimate a person's valence and arousal, respectively" and "two RBF networks that do the same thing as the MPLPs"
 		
 		\item \textit{3.3} "Design and develop a fuzzy inference system to fix the deficiencies in the arousal dimension"
 		
-		\item \textit{4.1} "Design and develop a convolutional neural network (CNN) that accurately classifies a person's emotion, based on facial expression."
+		\item \textit{4.2} "Fine-tune a pretrained CNN" to  obtain a "convolutional neural network (CNN) that accurately classifies a person's emotion, based on facial expression."
 	\end{itemize}
 
-	\noindent The dataset at our disposal are two, one for tasks \textit{3.1} and \textit{3.3} and another one for task \textit{4.1}.
+	\noindent The dataset at our disposal are two, one for tasks \textit{3.1} and \textit{3.3} and another one for task \textit{4.2}.
 	\noindent For what concern the first dataset, i.e. the one with biomedical signals for estimate arousal and valence, it is important to perform a cleaning of the data in order to obtain better performance for the neural networks that will be trained on it. This process, which is performed by the script \texttt{/matlab/data.m} is explained in the \autoref{chap: dataCleaning}. 
 	
 	\noindent After this chapter for each task is dedicated a chapter in which are explained the choices done and the results obtained in terms of performance.
@@ -203,18 +203,18 @@
 	
 	\chapter{Fuzzy Inference System}
 	
-	\chapter{Convolutional Neural Networks}
-	\noindent In this chapter the development and training of a CNN based on the pre-trained Alexnet which has the aim of classifying facial expressions. The possible classes are four:
+\chapter{Convolutional Neural Networks}
+	\noindent In this chapter is discussed the development and the training of a CNN based on the pre-trained AlexNet which has the aim of classifying facial expressions. The possible classes are four:
 	\begin{itemize}
 		\item Happiness
 		\item Anger
 		\item Disgust
 		\item Fear
 	\end{itemize} 
-	\noindent Two CNN have been developed (both are based on Alexnet). The first one is able to classify images in two classes (happiness and anger), instead the second one is able to classify images in all four classes.
+	\noindent Two CNNs have been developed (both are based on AlexNet). The first one is able to classify images in two classes (happiness and anger), instead the second one is able to classify images in all of the four classes.
 	
 	\section{CNN For 2-Classes Classification Problem}
-	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_2classes.m}. Due to the fact that the images of happiness and the ones for anger are very different we are able to obtain good result (accuracy equal to 82.67\%) without a proper selection of the images.
+	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_2classes.m}. Due to the fact that the images of happiness and the ones for anger are very different it is possible to obtain good result (accuracy equal to 82.67\%) without a proper selection of the images.
 	\noindent In fact as first experiment 500 images for each class are selected at random from the dataset. This experiment return the results shown in figure \ref{img: trainingCnnTwoClasses}:
 	
 	\begin{figure}[htbp]
@@ -224,21 +224,21 @@
 		\label{img: trainingCnnTwoClasses}
 	\end{figure}
 
-	\noindent Then a selection of the images has been performed and from the 500 images only 300 have been selected. The selection consist in the removal of the images with ambigous facial expressions. After this selection the results in figure \ref{img: trainingCnnTwoClassesAfterSelection}.
+	\noindent Then a selection of the images has been performed and from the 500 images only 300 have been selected. The selection consist in the removal of the images with ambiguous facial expressions. After this selection the results in figure \ref{img: trainingCnnTwoClassesAfterSelection} are obtained.
 	
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.31]{img/trainingCnnTwoClasses_afterSelection.png}
-		\caption{First experiment: after selection}
+		\caption{Second experiment: after selection}
 		\label{img: trainingCnnTwoClassesAfterSelection}
 	\end{figure}
 
-	\noindent Thanks to the selection of the images the accuracy has increased by $\approx 6\%$: from 82.67\% to 88.33\%.
+	\noindent Thanks to the selection of the images the validation accuracy has increased by $\approx 6\%$: from 82.67\% to 88.33\%.
 	 
 	\section{CNN For 4-Classes Classification Problem}
 	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_4classes.m}. As in the previous case two experiments have been performed, the first one with 500 images per class selected at random, the second one with 300 images selected removing the images classified wrong or with ambiguous facial expressions.
 	
-	\noindent The result for the experiments are respectively in the figures \ref{img: trainingCnnFourClasses} and \ref{img: trainingCnnFourClassesAfterSelection}.
+	\noindent The results for the experiments are respectively in the figures \ref{img: trainingCnnFourClasses} and \ref{img: trainingCnnFourClassesAfterSelection}.
 	
 	\noindent Analyzing the two results it is possible to see that, thanks to the selection, we have improved the accuracy from 58.17\% to 63.61\% that can be considered a reasonable result for a classification problem with 4 classes.
 	
@@ -259,7 +259,7 @@
 
 	
 	\section{Design Choices}
-	\noindent The dataset of images is very huge, but in order to maintain a reasonable training time only 500 images have been selected at random for each classes, then in order to improve perfomance a selection has been performed reducing this number to 300 images per class.
+	\noindent The dataset of images is very huge, but in order to maintain a reasonable training time only 500 images have been selected at random for each classes, then in order to improve performance a selection has been performed reducing this number to 300 images per class.
 	
 	\noindent In all experiments the images used in training have been augmented:
 	\begin{lstlisting}[language=Matlab]
@@ -275,9 +275,12 @@
 	
 	augmented_image_data_validation = augmentedImageDatastore(
 	input_size(1:2), img_data_validation);
+	
+	augmented_image_data_test = augmentedImageDatastore(
+	input_size(1:2), img_data_test);
 	\end{lstlisting}
 
-	\noindent The reason why also the image for validation are augmented is because the method for augmentation (that is \texttt{augmentedImageDatastore}) automatically resize the image in order to fit the input size requested from AlexNet. In fact you can see that there is no \texttt{imageAugmenter} in the \texttt{augmentedImageDatastore} for validation because it is used only for resizing, instead in the case of test images the same method perform both resizing and augmentation.
+	\noindent The reason why also the image for validation and for testing are augmented is because the method for augmentation (that is \texttt{augmentedImageDatastore}) automatically resize the image in order to fit the input size requested from AlexNet. In fact you can see that there is no \texttt{imageAugmenter} in the \texttt{augmentedImageDatastore} for validation and for test because it is used only for resizing, instead in the case of training images the same method perform both resizing and augmentation.
 	
 	\noindent For what concerns the CNN architecture only the last three layers of AlexNet have been removed and substituted with other three layer:
 	
@@ -291,7 +294,7 @@
 	\end{lstlisting}
 
 	\section{Final Results}
-	\noindent At the end after some experiments the best architectures is the one in the two matlab scripts. Some hyper-parameters have been changed (for instance the initial learning rate, the weight learn rate factor, the bias learn rate factor ecc..), but at the end the parameter that improve the performance is the the maximum number of epochs, in fact increasing this parameter the training of the network require more time but it is more effective also because at every epoch the data are shuffled and so the presentation order of the images is different. The results obtained are the ones in figure \ref{img: trainingCnnTwoClassesFinalResult} and \ref{img: trainingCnnFourClassesFinalResult}. For what concern the test accuracy:
+	\noindent At the end after some experiments the best architectures is the one in the two matlab scripts. Some hyper-parameters have been changed (for instance the initial learning rate, the weight learn rate factor, the bias learn rate factor ecc..), but at the end of the day the parameter that improve the performance is the maximum number of epochs, in fact increasing this parameter the training of the network require more time but it is more effective also because at every epoch the data are shuffled and so the presentation order of the images is different. The results obtained are the ones in figure \ref{img: trainingCnnTwoClassesFinalResult} and \ref{img: trainingCnnFourClassesFinalResult}. For what concern the test accuracy:
 	\begin{itemize}
 	\item Test Accuracy 2-classes problem: $97.08\%$
 	\item Test Accuracy 4-classes problem: $80.31\%$
@@ -310,6 +313,7 @@
 		\caption{Final result for four-classes classification problem}
 		\label{img: trainingCnnFourClassesFinalResult}
 	\end{figure}
+
 	\noindent For what concern the confusion matrix the results in figure \ref{img: confusion2classes} and \ref{img: confusion4classes} have been obtained.
 	
 	\begin{figure}[htbp]

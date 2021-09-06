@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  6 SEP 2021 19:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  6 SEP 2021 20:10
 entering extended mode
 **./IntelligentSystemsProjectReport.tex
 (IntelligentSystemsProjectReport.tex
@@ -577,8 +577,8 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 	\chapter
-              *{Introduction} [1
+l.93 \chapter
+             *{Introduction} [1
 
 ]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
@@ -668,27 +668,27 @@ Package pdftex.def Info: img/trainingCnnFourClasses_afterSelection.png  used on
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
  [10 <./img/trainingCnnTwoClasses_afterSelection.png> <./img/trainingCnnFourCla
 sses.png>] [11 <./img/trainingCnnFourClasses_afterSelection.png>]
-<img/trainingCnnTwoClassesFinalResult.png, id=189, 1294.8375pt x 685.8122pt>
+<img/trainingCnnTwoClassesFinalResult.png, id=192, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnTwoClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnTwoClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnTwoClassesFinalResult.png  used on inpu
-t line 302.
+t line 305.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnFourClassesFinalResult.png, id=190, 1294.8375pt x 685.8122pt>
+<img/trainingCnnFourClassesFinalResult.png, id=193, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnFourClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnFourClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnFourClassesFinalResult.png  used on inp
-ut line 309.
+ut line 312.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/confusion_2class.png, id=193, 419.31656pt x 430.60875pt>
+<img/confusion_2class.png, id=196, 419.31656pt x 430.60875pt>
 File: img/confusion_2class.png Graphic file (type png)
 <use img/confusion_2class.png>
-Package pdftex.def Info: img/confusion_2class.png  used on input line 317.
+Package pdftex.def Info: img/confusion_2class.png  used on input line 321.
 (pdftex.def)             Requested size: 293.51958pt x 301.42406pt.
-<img/confusion_4class.png, id=194, 421.575pt x 427.5975pt>
+<img/confusion_4class.png, id=197, 421.575pt x 427.5975pt>
 File: img/confusion_4class.png Graphic file (type png)
 <use img/confusion_4class.png>
-Package pdftex.def Info: img/confusion_4class.png  used on input line 324.
+Package pdftex.def Info: img/confusion_4class.png  used on input line 328.
 (pdftex.def)             Requested size: 295.10048pt x 299.31621pt.
  [12 <./img/trainingCnnTwoClassesFinalResult.png> <./img/trainingCnnFourClasses
 FinalResult.png>] [13 <./img/confusion_2class.png> <./img/confusion_4class.png>
@@ -698,13 +698,13 @@ Package rerunfilecheck Info: File `IntelligentSystemsProjectReport.out' has not
 (rerunfilecheck)             Checksum: 4E96E64C2486DEF05B112F42D789CDBA;1796.
  ) 
 Here is how much of TeX's memory you used:
- 14013 strings out of 479173
- 215826 string characters out of 2854167
- 880473 words of memory out of 3000000
- 31371 multiletter control sequences out of 15000+600000
+ 14018 strings out of 479173
+ 215919 string characters out of 2854167
+ 890473 words of memory out of 3000000
+ 31373 multiletter control sequences out of 15000+600000
  415610 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,7n,79p,814b,1691s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,7n,79p,821b,1691s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecrm0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -724,10 +724,10 @@ Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1728.pk
 s/cm/cmmi10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmr10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb>
-Output written on IntelligentSystemsProjectReport.pdf (14 pages, 1484180 bytes)
+Output written on IntelligentSystemsProjectReport.pdf (14 pages, 1485335 bytes)
 .
 PDF statistics:
- 602 PDF objects out of 1000 (max. 8388607)
- 64 named destinations out of 1000 (max. 500000)
+ 607 PDF objects out of 1000 (max. 8388607)
+ 67 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

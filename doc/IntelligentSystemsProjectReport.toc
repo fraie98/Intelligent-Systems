@@ -10,4 +10,4 @@
 \contentsline {section}{\numberline {4.1}CNN For 2-Classes Classification Problem}{9}{section.4.1}%
 \contentsline {section}{\numberline {4.2}CNN For 4-Classes Classification Problem}{10}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Design Choices}{11}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Final Results}{11}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Final Results}{12}{section.4.4}%
