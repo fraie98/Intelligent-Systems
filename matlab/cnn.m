@@ -8,7 +8,7 @@ close all;
 
 
 %% Constants and Parameters
-numberOfClasses = 2; %2
+numberOfClasses = 2;
 
 %% Load And Prepare Data
 % Load image from the dataset and prepare it adding labels
@@ -55,7 +55,6 @@ augmented_image_data_validation = augmentedImageDatastore(input_size(1:2), img_d
 
 % Training options
 training_options = trainingOptions('sgdm', ...
-    'ExecutionEnvironment', 'gpu', ...
     'MiniBatchSize', 10, ...
     'MaxEpochs', 6, ...
     'InitialLearnRate', 1e-4, ...
