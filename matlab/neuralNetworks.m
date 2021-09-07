@@ -40,20 +40,16 @@ net_arousal.divideParam.trainRatio = 0.7;
 net_arousal.divideParam.testRatio = 0;
 net_arousal.divideParam.valRatio = 0.3;
 
-%net_arousal.trainParam.lr = 0.1; 
-%net_arousal.trainParam.epochs = 100;
-%net_arousal.trainParam.max_fail = 5;
-
 if TRAIN_NET_AROUSAL == 1
     [net_arousal, tr] = train(net_arousal, x_train_arousal, y_train_arousal, "useParallel", "yes");
 
     figure(1);
     plotperform(tr);
 
-    % test
+    % Test
     test_output_arousal = net_arousal(x_test_arousal);
 
-    % plot regression
+    % Plot regression
     figure(2)
     plotregression(y_test_arousal, test_output_arousal, " Arousal ");
 end
@@ -72,10 +68,10 @@ if TRAIN_NET_VALENCE == 1
     figure(3);
     plotperform(tr_valence);
 
-    % test
+    % Test
     output_valence = net_valence(x_test_valence);
 
-    % plot regression
+    % Plot regression
     figure(4);
     plotregression(y_test_valence, output_valence, " Valence ");
 end
@@ -84,10 +80,8 @@ end
 goal_rbf_arousal = 0.02;   % Sum-Squared Error goal
 sc_arousal = 1;      % Spread constant
 
-%maxNumNeurons = 50;
-%numNeuronsToAdd = 5;
 if TRAIN_RBF_AROUSAL == 1
-    rbf_arousal = newrb(x_train_arousal, y_train_arousal, goal_rbf_arousal, sc_arousal); %,maxNumNeurons,numNeuronsToAdd);
+    rbf_arousal = newrb(x_train_arousal, y_train_arousal, goal_rbf_arousal, sc_arousal);
     view(rbf_arousal);
 
     output_test_arousal_rbf = rbf_arousal(x_test_arousal);
@@ -106,10 +100,8 @@ end
 goal_rbf_valence = 0.02;   % Sum-Squared Error goal
 sc_valence = 1;      % Spread constant
 
-%maxNumNeurons = 50;
-%numNeuronsToAdd = 5;
 if TRAIN_RBF_VALENCE == 1
-    rbf_valence = newrb(x_train_valence, y_train_valence, goal_rbf_valence, sc_valence); %,maxNumNeurons,numNeuronsToAdd);
+    rbf_valence = newrb(x_train_valence, y_train_valence, goal_rbf_valence, sc_valence);
     view(rbf_valence);
 
     output_test_valence_rbf = rbf_valence(x_test_valence);
