@@ -213,7 +213,107 @@
 \chapter{Neural Networks}
 	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals.	
 	\section{Fitnet}
+	\noindent The fitnet achieve good results with the default parameters, other tests have been performed in order to asses the number of neurons, at the 35 and 30 are the numbers that ensure good results and a low number of neurons.
+	In figures \ref{img: fitnet_valence}, \ref{img: perf_fitnet_valence}, \ref{img: errorhist_fitnet_valence}, \ref{img: regression_fitnet_valence} there are the results of the training of the fitnet using for estimate valence.
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.8]{img/fitnet_valence.png}
+		\caption{Architecture of fitnet for valence}
+		\label{img: fitnet_valence}
+	\end{figure}
+	
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.8]{img/perf_fitnet_valence.png}
+		\caption{Performance progress of fitnet for valence}
+		\label{img: perf_fitnet_valence}
+	\end{figure}
+	
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.9]{img/errorhist_fitnet_valence.png}
+		\caption{Error histogram of fitnet for valence}
+		\label{img: errorhist_fitnet_valence}
+	\end{figure}
+	
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.9]{img/regression_fitnet_valence.png}
+		\caption{Regression of fitnet for valence}
+		\label{img: regression_fitnet_valence}
+	\end{figure}
+	
+	\noindent From the figures it is possible to infer that the regression value is very high and also the error is low.
+	
+	\noindent In figures \ref{img: fitnet_arousal}, \ref{img: perf_fitnet_arousal}, \ref{img: errorhist_fitnet_arousal}, \ref{img: regression_fitnet_arousal} there are the results of the training of the fitnet using for estimate arousal.
+	\vspace{1cm}
+		\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/fitnet_arousal.png}
+		\caption{Architecture of fitnet for arousal}
+		\label{img: fitnet_arousal}
+	\end{figure}
+	
+		\vspace{3cm}
+		
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/perf_fitnet_arousal.png}
+		\caption{Performance progress of fitnet for arousal}
+		\label{img: perf_fitnet_arousal}
+	\end{figure}
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.9]{img/errorhist_fitnet_arousal.png}
+		\caption{Error histogram of fitnet for arousal}
+		\label{img: errorhist_fitnet_arousal}
+	\end{figure}
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.9]{img/regression_fitnet_arousal.png}
+		\caption{Regression of fitnet for arousal}
+		\label{img: regression_fitnet_arousal}
+	\end{figure}
+
+\newpage
 	\section{RBF}
+	\noindent In this case good results have been achieved with a spread constant equal to 1, then the number of neurons is set in order to achieve the goal that is in both cases of arousal and valence equal to 0.02 (Mean Square Error).
+	
+	\noindent The results of the RBF network for valence are in figure \ref{img: rbf_valence}, \ref{img: regression_rbf_valence}.
+	
+	\vspace{1.5cm}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/rbf_valence.png}
+		\caption{Architecture of RBF for valence}
+		\label{img: rbf_valence}
+	\end{figure}
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/regression_rbf_valence.png}
+		\caption{Regression of RBF for valence}
+		\label{img: regression_rbf_valence}
+	\end{figure}
+\newpage
+	\noindent The results of the RBF network for valence are in figure \ref{img: rbf_arousal}, \ref{img: regression_rbf_arousal}.
+	
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/rbf_arousal.png}
+		\caption{Architecture of RBF for arousal}
+		\label{img: rbf_arousal}
+	\end{figure}
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/regression_rbf_arousal.png}
+		\caption{Regression of RBF for arousal}
+		\label{img: regression_rbf_arousal}
+	\end{figure}
 	
 	\chapter{Fuzzy Inference System}
 	

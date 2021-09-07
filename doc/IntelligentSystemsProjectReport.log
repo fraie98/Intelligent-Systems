@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  6 SEP 2021 22:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  7 SEP 2021 10:25
 entering extended mode
 **./IntelligentSystemsProjectReport.tex
 (IntelligentSystemsProjectReport.tex
@@ -623,82 +623,160 @@ Package pdftex.def Info: img/afterBalancingValence.png  used on input line 176.
  [5 <./img/afterBalancingArousal.png (PNG copy)> <./img/afterBalancingValence.p
 ng (PNG copy)>] [6]
 Chapter 2.
+<img/fitnet_valence.png, id=134, 303.38344pt x 81.30376pt>
+File: img/fitnet_valence.png Graphic file (type png)
+<use img/fitnet_valence.png>
+Package pdftex.def Info: img/fitnet_valence.png  used on input line 220.
+(pdftex.def)             Requested size: 242.70708pt x 65.04308pt.
+<img/perf_fitnet_valence.png, id=135, 421.575pt x 316.18124pt>
+File: img/perf_fitnet_valence.png Graphic file (type png)
+<use img/perf_fitnet_valence.png>
+Package pdftex.def Info: img/perf_fitnet_valence.png  used on input line 227.
+(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+<img/errorhist_fitnet_valence.png, id=136, 421.575pt x 316.18124pt>
+File: img/errorhist_fitnet_valence.png Graphic file (type png)
+<use img/errorhist_fitnet_valence.png>
+Package pdftex.def Info: img/errorhist_fitnet_valence.png  used on input line 2
+34.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+<img/regression_fitnet_valence.png, id=137, 376.40625pt x 376.40625pt>
+File: img/regression_fitnet_valence.png Graphic file (type png)
+<use img/regression_fitnet_valence.png>
+Package pdftex.def Info: img/regression_fitnet_valence.png  used on input line 
+241.
+(pdftex.def)             Requested size: 338.76248pt x 338.76248pt.
 [7
 
-]
+ <./img/fitnet_valence.png> <./img/perf_fitnet_valence.png (PNG copy)>]
+[8 <./img/errorhist_fitnet_valence.png (PNG copy)> <./img/regression_fitnet_val
+ence.png (PNG copy)>]
+<img/fitnet_arousal.png, id=155, 303.38344pt x 82.05656pt>
+File: img/fitnet_arousal.png Graphic file (type png)
+<use img/fitnet_arousal.png>
+Package pdftex.def Info: img/fitnet_arousal.png  used on input line 252.
+(pdftex.def)             Requested size: 303.38269pt x 82.05635pt.
+<img/perf_fitnet_arousal.png, id=156, 421.575pt x 316.18124pt>
+File: img/perf_fitnet_arousal.png Graphic file (type png)
+<use img/perf_fitnet_arousal.png>
+Package pdftex.def Info: img/perf_fitnet_arousal.png  used on input line 261.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+
+Overfull \hbox (9.00897pt too wide) in paragraph at lines 261--262
+ [][] 
+ []
+
+<img/errorhist_fitnet_arousal.png, id=157, 421.575pt x 316.18124pt>
+File: img/errorhist_fitnet_arousal.png Graphic file (type png)
+<use img/errorhist_fitnet_arousal.png>
+Package pdftex.def Info: img/errorhist_fitnet_arousal.png  used on input line 2
+68.
+(pdftex.def)             Requested size: 379.41399pt x 284.56049pt.
+<img/regression_fitnet_arousal.png, id=158, 376.40625pt x 376.40625pt>
+File: img/regression_fitnet_arousal.png Graphic file (type png)
+<use img/regression_fitnet_arousal.png>
+Package pdftex.def Info: img/regression_fitnet_arousal.png  used on input line 
+275.
+(pdftex.def)             Requested size: 338.76248pt x 338.76248pt.
+[9 <./img/fitnet_arousal.png> <./img/perf_fitnet_arousal.png (PNG copy)>]
+[10 <./img/errorhist_fitnet_arousal.png (PNG copy)> <./img/regression_fitnet_ar
+ousal.png (PNG copy)>]
+<img/rbf_valence.png, id=174, 404.26031pt x 102.3825pt>
+File: img/rbf_valence.png Graphic file (type png)
+<use img/rbf_valence.png>
+Package pdftex.def Info: img/rbf_valence.png  used on input line 289.
+(pdftex.def)             Requested size: 404.25932pt x 102.38225pt.
+<img/regression_rbf_valence.png, id=175, 376.40625pt x 376.40625pt>
+File: img/regression_rbf_valence.png Graphic file (type png)
+<use img/regression_rbf_valence.png>
+Package pdftex.def Info: img/regression_rbf_valence.png  used on input line 296
+.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+ [11 <./img/rbf_valence.png> <./img/regression_rbf_valence.png (PNG copy)>]
+<img/rbf_arousal.png, id=185, 406.51875pt x 106.14656pt>
+File: img/rbf_arousal.png Graphic file (type png)
+<use img/rbf_arousal.png>
+Package pdftex.def Info: img/rbf_arousal.png  used on input line 306.
+(pdftex.def)             Requested size: 406.51775pt x 106.1463pt.
+<img/regression_rbf_arousal.png, id=186, 376.40625pt x 376.40625pt>
+File: img/regression_rbf_arousal.png Graphic file (type png)
+<use img/regression_rbf_arousal.png>
+Package pdftex.def Info: img/regression_rbf_arousal.png  used on input line 313
+.
+(pdftex.def)             Requested size: 376.40532pt x 376.40532pt.
+ [12 <./img/rbf_arousal.png> <./img/regression_rbf_arousal.png (PNG copy)>]
 Chapter 3.
-[8
+[13
 
 ]
 Chapter 4.
-<img/trainingCnnTwoClasses.png, id=139, 1294.8375pt x 685.8122pt>
+<img/trainingCnnTwoClasses.png, id=200, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnTwoClasses.png Graphic file (type png)
 <use img/trainingCnnTwoClasses.png>
-Package pdftex.def Info: img/trainingCnnTwoClasses.png  used on input line 237.
+Package pdftex.def Info: img/trainingCnnTwoClasses.png  used on input line 337.
 
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnTwoClasses_afterSelection.png, id=141, 1294.8375pt x 685.8122pt
+<img/trainingCnnTwoClasses_afterSelection.png, id=202, 1294.8375pt x 685.8122pt
 >
 File: img/trainingCnnTwoClasses_afterSelection.png Graphic file (type png)
 <use img/trainingCnnTwoClasses_afterSelection.png>
 Package pdftex.def Info: img/trainingCnnTwoClasses_afterSelection.png  used on 
-input line 246.
+input line 346.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-[9
+[14
 
  <./img/trainingCnnTwoClasses.png>]
-<img/trainingCnnFourClasses.png, id=151, 1294.8375pt x 685.8122pt>
+<img/trainingCnnFourClasses.png, id=212, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnFourClasses.png Graphic file (type png)
 <use img/trainingCnnFourClasses.png>
-Package pdftex.def Info: img/trainingCnnFourClasses.png  used on input line 262
+Package pdftex.def Info: img/trainingCnnFourClasses.png  used on input line 362
 .
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnFourClasses_afterSelection.png, id=152, 1294.8375pt x 685.8122p
+<img/trainingCnnFourClasses_afterSelection.png, id=213, 1294.8375pt x 685.8122p
 t>
 File: img/trainingCnnFourClasses_afterSelection.png Graphic file (type png)
 <use img/trainingCnnFourClasses_afterSelection.png>
 Package pdftex.def Info: img/trainingCnnFourClasses_afterSelection.png  used on
- input line 269.
+ input line 369.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
- [10 <./img/trainingCnnTwoClasses_afterSelection.png> <./img/trainingCnnFourCla
-sses.png>] [11 <./img/trainingCnnFourClasses_afterSelection.png>]
-<img/trainingCnnTwoClassesFinalResult.png, id=193, 1294.8375pt x 685.8122pt>
+ [15 <./img/trainingCnnTwoClasses_afterSelection.png> <./img/trainingCnnFourCla
+sses.png>] [16 <./img/trainingCnnFourClasses_afterSelection.png>]
+<img/trainingCnnTwoClassesFinalResult.png, id=254, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnTwoClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnTwoClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnTwoClassesFinalResult.png  used on inpu
-t line 320.
+t line 420.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnFourClassesFinalResult.png, id=194, 1294.8375pt x 685.8122pt>
+<img/trainingCnnFourClassesFinalResult.png, id=255, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnFourClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnFourClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnFourClassesFinalResult.png  used on inp
-ut line 327.
+ut line 427.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/confusion_2class.png, id=197, 419.31656pt x 430.60875pt>
+<img/confusion_2class.png, id=258, 419.31656pt x 430.60875pt>
 File: img/confusion_2class.png Graphic file (type png)
 <use img/confusion_2class.png>
-Package pdftex.def Info: img/confusion_2class.png  used on input line 336.
+Package pdftex.def Info: img/confusion_2class.png  used on input line 436.
 (pdftex.def)             Requested size: 293.51958pt x 301.42406pt.
-<img/confusion_4class.png, id=198, 421.575pt x 427.5975pt>
+<img/confusion_4class.png, id=259, 421.575pt x 427.5975pt>
 File: img/confusion_4class.png Graphic file (type png)
 <use img/confusion_4class.png>
-Package pdftex.def Info: img/confusion_4class.png  used on input line 343.
+Package pdftex.def Info: img/confusion_4class.png  used on input line 443.
 (pdftex.def)             Requested size: 295.10048pt x 299.31621pt.
- [12 <./img/trainingCnnTwoClassesFinalResult.png> <./img/trainingCnnFourClasses
-FinalResult.png>] [13 <./img/confusion_2class.png> <./img/confusion_4class.png>
+ [17 <./img/trainingCnnTwoClassesFinalResult.png> <./img/trainingCnnFourClasses
+FinalResult.png>] [18 <./img/confusion_2class.png> <./img/confusion_4class.png>
 ] (IntelligentSystemsProjectReport.aux)
 Package rerunfilecheck Info: File `IntelligentSystemsProjectReport.out' has not
  changed.
 (rerunfilecheck)             Checksum: 4E96E64C2486DEF05B112F42D789CDBA;1796.
  ) 
 Here is how much of TeX's memory you used:
- 14018 strings out of 479173
- 215924 string characters out of 2854167
+ 14131 strings out of 479173
+ 219083 string characters out of 2854167
  890473 words of memory out of 3000000
- 31374 multiletter control sequences out of 15000+600000
+ 31458 multiletter control sequences out of 15000+600000
  415610 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,7n,79p,821b,1691s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,8n,79p,821b,1691s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecrm0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -718,10 +796,10 @@ Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1728.pk
 s/cm/cmmi10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmr10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmsy10.pfb>
-Output written on IntelligentSystemsProjectReport.pdf (14 pages, 1485301 bytes)
+Output written on IntelligentSystemsProjectReport.pdf (19 pages, 1707756 bytes)
 .
 PDF statistics:
- 607 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 671 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

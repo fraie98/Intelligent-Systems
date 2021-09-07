@@ -22,14 +22,14 @@ test_data_arousal = load('data/biomedical_signals/test_data_arousal.mat');
 training_data_arousal = load('data/biomedical_signals/training_data_arousal.mat');
 
 x_train_arousal = training_data_arousal.training_data_arousal.x_train_arousal';
-x_train_valence = training_data_valence.training_data.x_train_valence';
+x_train_valence = training_data_valence.training_data_valence.x_train_valence';
 y_train_arousal = training_data_arousal.training_data_arousal.y_train_arousal';
-y_train_valence = training_data_valence.training_data.y_train_valence';
+y_train_valence = training_data_valence.training_data_valence.y_train_valence';
 
 x_test_arousal = test_data_arousal.test_data_arousal.x_test_arousal';
-x_test_valence = test_data_valence.test_data.x_test_valence';
+x_test_valence = test_data_valence.test_data_valence.x_test_valence';
 y_test_arousal = test_data_arousal.test_data_arousal.y_test_arousal';
-y_test_valence = test_data_valence.test_data.y_test_valence';
+y_test_valence = test_data_valence.test_data_valence.y_test_valence';
 
 
 %% Fitnet For Arousal
@@ -118,7 +118,7 @@ if TRAIN_RBF_VALENCE == 1
     plot(x_test_valence, y_test_valence,'r');
 
     figure(9);
-    plot(x_test_valence, output_test_valene_rbf, 'b--');
+    plot(x_test_valence, output_test_valence_rbf, 'b--');
 
     figure(10);
     plotregression(y_test_valence, output_test_valence_rbf);
