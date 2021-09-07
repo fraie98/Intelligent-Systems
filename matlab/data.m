@@ -13,19 +13,20 @@ close all;
 COL_AROUSAL = 1;
 COL_VALENCE = 2;
 % 1 yes (plot graphs), 0 no (do not plot)
-PLOT_GRAPHS = 1; 
+PLOT_GRAPHS = 0; 
 % Number of repetition for sequentialfs
-repetition_sequentialfs = 5;
+repetition_sequentialfs = 1; %5
 % Number of features of the original dataset
 HOW_MANY_FEATURES = 54;
 % Number of features that I will select
-FEATURES_TO_SELECT = 8;
+FEATURES_TO_SELECT = 3; %8 standard; 3 fuzzy
 % 0 if I do not want to save data (for testing)
 % 1 if I want to save data
 SAVE_DATA = 0;
+SAVE_DATA_FUZZY = 1;
 % If 1 the script will stop after data balancing without performing
 % features selection
-ONLY_BALANCING = 1;
+ONLY_BALANCING = 0;
 
 % load data
 dataset = load("data/biomedical_signals/dataset.mat");
@@ -164,6 +165,8 @@ if ONLY_BALANCING == 1
     fprintf(" SCRIPT STOPPED - Only data balancing performed \n");
     return;
 end
+
+fprintf(" --- FEATURES SELECTION --- \n");
 %% Cross Validation and feature selection
 
 % Let divide output from input
@@ -183,34 +186,35 @@ x_test = features(idxTest, :);
 y_test_aro = target_arousal(idxTest, :);
 y_test_val = target_valence(idxTest, :);
 
+%DECOMMENTARE
 % Feature Selection For Valence
-counter_feat_sel_valence = zeros(HOW_MANY_FEATURES,1)';
-for i = 1:repetition_sequentialfs
-    fprintf(" Sequentialfs for valence: repetion %i\n",i);
-    c_valence = cvpartition(y_train_val, 'k', 10);
-    opts = statset('Display', 'iter','UseParallel',true);
-    [features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
+%counter_feat_sel_valence = zeros(HOW_MANY_FEATURES,1)';
+%for i = 1:repetition_sequentialfs
+%    fprintf(" Sequentialfs for valence: repetion %i\n",i);
+%    c_valence = cvpartition(y_train_val, 'k', 10);
+%    opts = statset('Display', 'iter','UseParallel',true);
+%    [features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
     
-    for j = 1:HOW_MANY_FEATURES
-        if features_selected_for_valence(j) == 1
-            counter_feat_sel_valence(j) = counter_feat_sel_valence(j) + 1;
-        end
-    end
+%    for j = 1:HOW_MANY_FEATURES
+%        if features_selected_for_valence(j) == 1
+%            counter_feat_sel_valence(j) = counter_feat_sel_valence(j) + 1;
+%        end
+%    end
 
-end
+%end
 
-f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
-for i = 1:FEATURES_TO_SELECT
+%f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
+%for i = 1:FEATURES_TO_SELECT
     % I find the maximum
-    [~, f_sel_valence(i)] = max(counter_feat_sel_valence);
-    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_valence(f_sel_valence(i)), f_sel_valence(i)); 
+%    [~, f_sel_valence(i)] = max(counter_feat_sel_valence);
+%    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_valence(f_sel_valence(i)), f_sel_valence(i)); 
     % I set the maximum to zero, thus at the next iteration the second
     % maximum value will be selected
-    counter_feat_sel_valence(f_sel_valence(i)) = 0;
-end
+%    counter_feat_sel_valence(f_sel_valence(i)) = 0;
+%end
 
-fprintf(" Features Selected For Valence:");
-disp(f_sel_valence);
+%fprintf(" Features Selected For Valence:");
+%disp(f_sel_valence);
 
 
 % Features Selection For Arousal
@@ -265,6 +269,22 @@ if SAVE_DATA == 1
     
     disp(" DATA SAVED ");
 end
+
+if SAVE_DATA_FUZZY == 1
+    %save('data/biomedical_signals/fuzzy/dataset_cleaned.mat','dataset_cleaned');
+
+    % struct for training data
+    fuzzyData.x_train_arousal = x_train(:,f_sel_arousal);
+    fuzzyData.y_train_arousal = y_train_aro;
+    fuzzyData.x_test_arousal = x_test(:,f_sel_arousal);
+    fuzzyData.y_test_arousal = y_test_aro;
+    fuzzyData.best_features = f_sel_arousal;
+    fuzzyData.y_values = possible_values;
+    save('data/biomedical_signals/fuzzyData.mat', 'fuzzyData');
+    
+    disp(" DATA FUZZY SAVED ");
+end
+
 %% Custom function for sequentialfs
 function mse = myfun(xTrain, yTrain, xTest, yTest)
     % create network
