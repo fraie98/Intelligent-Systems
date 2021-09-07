@@ -15,7 +15,7 @@ COL_VALENCE = 2;
 % 1 yes (plot graphs), 0 no (do not plot)
 PLOT_GRAPHS = 0; 
 % Number of repetition for sequentialfs
-repetition_sequentialfs = 1; %5
+repetition_sequentialfs = 5; %5
 % Number of features of the original dataset
 HOW_MANY_FEATURES = 54;
 % Number of features that I will select
@@ -271,8 +271,6 @@ if SAVE_DATA == 1
 end
 
 if SAVE_DATA_FUZZY == 1
-    %save('data/biomedical_signals/fuzzy/dataset_cleaned.mat','dataset_cleaned');
-
     % struct for training data
     fuzzyData.x_train_arousal = x_train(:,f_sel_arousal);
     fuzzyData.y_train_arousal = y_train_aro;

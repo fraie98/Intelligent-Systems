@@ -4,7 +4,7 @@ Type='mamdani'
 Version=2.0
 NumInputs=3
 NumOutputs=1
-NumRules=0
+NumRules=5
 AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
@@ -12,28 +12,28 @@ AggMethod='max'
 DefuzzMethod='centroid'
 
 [Input1]
-Name='Feature17'
-Range=[-1.98 2.966617]
+Name='Feature24'
+Range=[-1.276359 1.85]
 NumMFs=3
-MF1='low':'trapmf',[-3.77 -2.12 -1.1 -0.141234126984127]
-MF2='medium':'trimf',[-1.47638888888889 0.584911111111112 2.64561111111111]
-MF3='high':'trapmf',[1.21984523809524 2.1 3.17 4.82]
+MF1='low':'trapmf',[-2.41 -1.36 -0.721 -0.339991404011461]
+MF2='medium':'trimf',[-0.769928366762177 -0.054 0.556]
+MF3='high':'trapmf',[0.179515759312322 0.977 2.13 3.18]
 
 [Input2]
 Name='Feature27'
-Range=[-0.0629 0.034433]
+Range=[-3e-05 5e-05]
 NumMFs=3
-MF1='low':'trimf',[-0.1035 -0.0629 -0.02234]
-MF2='medium':'trimf',[-0.05479 -0.01424 0.02632]
-MF3='high':'trimf',[-0.006125 0.03443 0.075]
+MF1='low':'trapmf',[-6e-05 -3.33e-05 -9.9426934097421e-06 6e-10]
+MF2='medium':'trimf',[-1.02e-05 8.85386819484242e-06 2.95e-05]
+MF3='high':'trapmf',[1.89398280802292e-05 3.41e-05 5.36e-05 8.29e-05]
 
 [Input3]
-Name='Feature35'
-Range=[-3.969 9.270929]
+Name='Feature37'
+Range=[-0.06493 0.034879]
 NumMFs=3
-MF1='low':'trimf',[-9.486 -3.968 1.547]
-MF2='medium':'trimf',[-2.865 2.65 8.168]
-MF3='high':'trimf',[3.753 9.271 14.79]
+MF1='low':'trapmf',[-0.0663 -0.0661 -0.0312 -0.0211766178736518]
+MF2='medium':'trimf',[-0.0311877349768875 -0.00548999229583975 0.0188122650231125]
+MF3='high':'trapmf',[0.0062 0.023115030816641 0.0376 0.0419]
 
 [Output1]
 Name='arousal'
@@ -44,3 +44,8 @@ MF2='neutral':'trimf',[2.5 5 7.5]
 MF3='high':'trimf',[6.5 9 12.3]
 
 [Rules]
+0 2 0, 2 (1) : 1
+2 0 0, -1 (1) : 1
+3 0 0, 1 (1) : 1
+0 0 1, -3 (1) : 1
+0 0 2, -1 (1) : 1

@@ -315,7 +315,74 @@
 		\label{img: regression_rbf_arousal}
 	\end{figure}
 	
-	\chapter{Fuzzy Inference System}
+\chapter{Fuzzy Inference System}
+	\noindent In order to develop a fuzzy inference system to estimate the values of arousal an analysis of the 3 best features selected by running 5 times the sequentialfs algorithm (the reason behind the choice of this number is the same explained in the introduction). This analysis is performed by the script \texttt{matlab/analysis\_for\_fis.m}.
+	
+	\noindent As first thing we have to fix the universe of discourse of the three features, in order to do so we look for the maximum and the minimum value for each feature, the results are the following:
+	\begin{itemize}
+		\item Feature 24: $[-1.276359,1.849861]$
+ 		\item Feature 27: $[-3 \times 10^{-5}, 5 \times 10^{-5}]$
+		\item Feature 37: $[-0.064933, 0.034879]$
+	\end{itemize}
+	
+	\noindent Then we have to check how many samples that has a low/medium/high output correspond to the different values of a particular feature. In order to do so we have to fix the meaning of low, medium and high output. As we have seen the possible values of the arousal/valence can be divided in 7 class, in the code we have considered a vector with the seven values and the we access this vector giving the class, thanks to this we deal with classes and not with the exact value. This is important in order to understand the following code:
+	\begin{lstlisting}[language=Matlab]
+y_level_low = find(y_train==y_values(1) | y_train==y_values(2));
+y_level_medium = find(
+	y_train==y_values(3) | y_train==y_values(4) | y_train==y_values(5));
+y_level_high = find(y_train==y_values(6) | y_train==y_values(7));
+		
+%Low
+if PLOT_HIST_LOW==1
+	figure(1);
+	histogram(x_train(y_level_low,1));
+	figure(2);
+	histogram(x_train(y_level_low,2));
+	figure(3);
+	histogram(x_train(y_level_low,3));
+end
+		
+%.... mutata mutandis for medium and high
+	\end{lstlisting}
+	
+	\noindent Now I am ready to perform the development of the fuzzy system. The approach used is the one that consist in using the graphical user interface and so the command \texttt{fuzzyLogicDesigner}.
+	
+	\noindent The input variable and their membership functions are the ones shown in figure \ref{img: input1_fuzzy}, \ref{img: input2_fuzzy} and \ref{img: input3_fuzzy}. In figure \ref{img: output_fuzzy} is shown the output function with its membership function.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/input1_fuzzy.png}
+		\caption{Feature 24}
+		\label{img: input1_fuzzy}
+	\end{figure}
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/input2_fuzzy.png}
+		\caption{Feature 27}
+		\label{img: input2_fuzzy}
+	\end{figure}
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/input3_fuzzy.png}
+		\caption{Feature 37}
+		\label{img: input3_fuzzy}
+	\end{figure}
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1]{img/output_fuzzy.png}
+		\caption{Output}
+		\label{img: output_fuzzy}
+	\end{figure}
+	
+	
+	\noindent The rules have been written thanks to the histogram plotted in the analysis phase, in order to understand let make an example.
+	
+	\noindent ESEMPIO DI UNA REGOLA E METTERE UN ISTOGRAMMA
+	
+	
 	
 \chapter{Convolutional Neural Networks}
 \label{chap: CNN}
