@@ -215,7 +215,7 @@
 	\noindent The division of training data and test data in two files, one for valence and one for arousal, is done only for practical reasons, in fact the repetitions of sequentialfs has been performed only for arousal and only for valence separately due to the time needed.
 	
 \chapter{Neural Networks}
-	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals.	
+	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals. The code is in the script \texttt{matlab/neuralNetworks.m}.	
 	\section{Fitnet}
 	\noindent After some experiments it has been obtained that the fitnet achieve good results with the default parameters, then after other tests performed in order to asses the number of neurons, the result was that 35 and 30 are the numbers that ensure good results with a low number of neurons.
 	In figures \ref{img: fitnet_valence}, \ref{img: perf_fitnet_valence}, \ref{img: errorhist_fitnet_valence}, \ref{img: regression_fitnet_valence} there are the results of the training of the fitnet using to estimate valence.
@@ -228,7 +228,7 @@
 	
 		\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=0.8]{img/perf_fitnet_valence.png}
+		\includegraphics[scale=0.7]{img/perf_fitnet_valence.png}
 		\caption{Performance progress of fitnet for valence}
 		\label{img: perf_fitnet_valence}
 	\end{figure}
@@ -258,7 +258,7 @@
 		\label{img: fitnet_arousal}
 	\end{figure}
 	
-		\vspace{3cm}
+	%	\vspace{3cm}
 		
 	\begin{figure}[htbp]
 		\centering
@@ -304,7 +304,7 @@
 		\label{img: regression_rbf_valence}
 	\end{figure}
 \newpage
-	\noindent The results of the RBF network for valence are in figure \ref{img: rbf_arousal}, \ref{img: regression_rbf_arousal}.
+	\noindent The results of the RBF network for arousal are in figure \ref{img: rbf_arousal}, \ref{img: regression_rbf_arousal}.
 	
 	
 	\begin{figure}[htbp]
@@ -322,7 +322,7 @@
 	\end{figure}
 	
 \chapter{Fuzzy Inference System}
-	\noindent In order to develop a fuzzy inference system to estimate the values of arousal an analysis of the 3 best features selected by running 5 times the sequentialfs algorithm (the reason behind the choice of this number is the same explained in the introduction). This analysis is performed by the script \texttt{matlab/analysis\_for\_fis.m}. The other files of this task are:
+	\noindent In order to develop a fuzzy inference system to estimate the values of arousal an analysis of the three best features selected by running 5 times the sequentialfs algorithm (the reason behind the choice of this number is the same explained in the introduction) must be done. This analysis is performed by the script \texttt{matlab/analysis\_for\_fis.m}. The other files of this task are:
 	\begin{itemize}
 		\item \texttt{matlab/FIS\_arousal.fis}
 		
@@ -341,9 +341,9 @@
 		\item Feature 37: $[-0.064933, 0.034879]$
 	\end{itemize}
 	
-	\noindent Then we have to check how many samples that has a low/medium/high output correspond to the different values of a particular feature. In order to do so we have to fix the meaning of low, medium and high output.
+	\noindent Then we have to check how many samples that has a low/medium/high output correspond to the different values of a particular feature. In order to do so we have to fix the meaning of low, medium and high output. As we have seen the possible values of the arousal/valence can be divided in 7 class, then values of first and second class are considered low, values of third, fourth and fifth are considered neutral and values of sixth and seventh class are considered high.
 	
-	\noindent As we have seen the possible values of the arousal/valence can be divided in 7 class, in the code we have considered a vector with the seven values and the we access this vector giving the class, thanks to this we deal with classes and not with the exact value. This is important in order to understand the following code:
+	\noindent From the implementation viewpoint we have a vector with the seven values and the we access this vector giving the class, thanks to this we deal with classes and not with the exact value. This is important in order to understand the following code:
 	\begin{lstlisting}[language=Matlab]
 y_level_low = find(y_train==y_values(1) | y_train==y_values(2));
 y_level_medium = find(
@@ -396,7 +396,7 @@ end
 		\label{img: output_fuzzy}
 	\end{figure}
 	
-	\noindent The rules and also the membership functions for each features, have been written thanks to the histogram plotted in the analysis phase, a subset of the histograms are the ones in figures \ref{img: hist_example1}, \ref{img: hist_example2} and \ref{img: hist_example3} that show how many samples with low, medium or high values of output correspond to the different values of feature 24. Then in figure \ref{img: rules} it is possible to see the different rules.
+	\noindent The rules and also the membership functions for each features, have been written thanks to the histogram plotted in the analysis phase, a subset of the histograms are the ones in figures \ref{img: hist_example1}, \ref{img: hist_example2} and \ref{img: hist_example3} that show how many samples with low, medium or high values of output correspond to the different values of feature 24 (hence we have three plots for each feature). Then in figure \ref{img: rules} it is possible to see the different rules.
 	
 		
 	\begin{figure}[htbp]
@@ -428,7 +428,9 @@ end
 		\label{img: rules}
 	\end{figure}
 
-	\noindent In order to understand the reasoning behind the rule let make an example. We take into account the rule number 3 i.e. \texttt{"If (Feature24 is high) then (arousal is low)"}, we can see that we can infer this rule analyzing the three graphs (figures \ref{img: hist_example1}, \ref{img: hist_example2}, \ref{img: hist_example3}), in fact the arousal feature 24 is high more or less for values greater than 0.5 (figure \ref{img: input1_fuzzy}) and for this values there are no sample for what deal with the medium and high outputs instead there are values for low outputs. This means that if the feature 24 has values more or less greater or equal than 0.5 (so it assume high values) then the arousal is low. So we have inferred the fuzzy rule 3.
+	\noindent In order to understand the reasoning behind the rules let make an example. We take into account the rule number 3 i.e. \texttt{"If (Feature24 is high) then (arousal is low)"}.
+	
+	\noindent This rule can be inferred analyzing the three graphs corresponding to feature 24 (figures \ref{img: hist_example1}, \ref{img: hist_example2}, \ref{img: hist_example3}), in fact feature 24 has \textit{high} values more or less for values greater than 0.5 (figure \ref{img: input1_fuzzy}) and for these values there are no samples for what deal with the medium and high arousal outputs (see \ref{img: hist_example2} and \ref{img: hist_example3}) whereas there are values for low arousal outputs (see \ref{img: hist_example1}). This means that if the feature 24 has values more or less greater or equal than 0.5 (so it assume \textit{high} values) then the arousal is \textit{low}. So we have inferred the fuzzy rule 3.
 	
 	
 	
@@ -442,11 +444,11 @@ end
 		\item Disgust
 		\item Fear
 	\end{itemize} 
-	\noindent Two CNNs have been developed (both are based on AlexNet). The first one is able to classify images in two classes (happiness and anger), instead the second one is able to classify images in all of the four classes.
+	\noindent Two CNNs have been developed (both are based on AlexNet). The first one is able to classify images in two classes (happiness and anger), instead the second one is able to classify images in all of the four classes. The scripts are \texttt{matlab/cnn\_2classes.m} and \texttt{matlab/cnn\_4classes.m}. 
 	
 	\section{CNN For 2-Classes Classification Problem}
 	\noindent The matlab code for this CNN is in the file \texttt{/matlab/cnn\_2classes.m}. Due to the fact that the images of happiness and the ones for anger are very different it is possible to obtain good result (accuracy equal to 82.67\%) without a proper selection of the images.
-	\noindent In fact as first experiment 500 images for each class are selected at random from the dataset. This experiment return the results shown in figure \ref{img: trainingCnnTwoClasses}:
+	\noindent In fact as first experiment 500 images for each class are selected at random from the dataset. This experiment returns the results shown in figure \ref{img: trainingCnnTwoClasses}:
 	
 	\begin{figure}[htbp]
 		\centering
@@ -471,7 +473,7 @@ end
 	
 	\noindent The results for the experiments are respectively in the figures \ref{img: trainingCnnFourClasses} and \ref{img: trainingCnnFourClassesAfterSelection}.
 	
-	\noindent Analyzing the two results it is possible to see that, thanks to the selection, we have improved the accuracy from 58.17\% to 63.61\% that can be considered a reasonable result for a classification problem with 4 classes.
+	\noindent Analyzing the two results it is possible to see that, thanks to the selection, we have improved the accuracy from 58.17\% to 63.61\% that can be considered a reasonable result for a classification problem with 4 classes, in any case this result can be improved, see section \ref{sec: final}.
 	
 	\begin{figure}[htbp]
 		\centering
@@ -525,7 +527,8 @@ end
 	\end{lstlisting}
 
 	\section{Final Results}
-	\noindent At the end after some experiments the best architectures is the one in the two matlab scripts. Some hyper-parameters have been changed (for instance the initial learning rate, the weight learn rate factor, the bias learn rate factor ecc..), but at the end of the day the parameter that improve the performance is the maximum number of epochs, in fact increasing this parameter the training of the network require more time but it is more effective also because at every epoch the data are shuffled and so the presentation order of the images is different. The results obtained are the ones in figure \ref{img: trainingCnnTwoClassesFinalResult} and \ref{img: trainingCnnFourClassesFinalResult}. For what concern the test accuracy:
+	\label{sec: final}
+	\noindent At the end after some experiments the best architectures is the one in the two matlab scripts. Some hyper-parameters have been changed (for instance the initial learning rate, the weight learn rate factor, the bias learn rate factor ecc..), but the parameter that improve the performance is the maximum number of epochs, in fact increasing this parameter the network has more time to be trained and so the the training is more effective. Another observation is that at every epoch the data are shuffled and so the presentation order of the training images is different, hence the CNN training is not dependent from the presentation order. The results obtained are the ones in figure \ref{img: trainingCnnTwoClassesFinalResult} and \ref{img: trainingCnnFourClassesFinalResult}. For what concern the test accuracy:
 	\begin{itemize}
 	\item Test Accuracy 2-classes problem: $97.08\%$
 	\item Test Accuracy 4-classes problem: $80.31\%$

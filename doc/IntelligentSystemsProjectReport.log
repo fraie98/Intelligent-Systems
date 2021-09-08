@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  8 SEP 2021 14:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.17)  8 SEP 2021 16:43
 entering extended mode
 **./IntelligentSystemsProjectReport.tex
 (IntelligentSystemsProjectReport.tex
@@ -636,7 +636,7 @@ Package pdftex.def Info: img/fitnet_valence.png  used on input line 224.
 File: img/perf_fitnet_valence.png Graphic file (type png)
 <use img/perf_fitnet_valence.png>
 Package pdftex.def Info: img/perf_fitnet_valence.png  used on input line 231.
-(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
+(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
 <img/errorhist_fitnet_valence.png, id=141, 421.575pt x 316.18124pt>
 File: img/errorhist_fitnet_valence.png Graphic file (type png)
 <use img/errorhist_fitnet_valence.png>
@@ -729,15 +729,15 @@ File: img/output_fuzzy.png Graphic file (type png)
 <use img/output_fuzzy.png>
 Package pdftex.def Info: img/output_fuzzy.png  used on input line 394.
 (pdftex.def)             Requested size: 259.7223pt x 140.47589pt.
-<img/hist_example1.png, id=212, 421.575pt x 316.18124pt>
-File: img/hist_example1.png Graphic file (type png)
-<use img/hist_example1.png>
-Package pdftex.def Info: img/hist_example1.png  used on input line 404.
-(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
 [13
 
 ] [14 <./img/input1_fuzzy.png> <./img/input2_fuzzy.png> <./img/input3_fuzzy.png
 > <./img/output_fuzzy.png>]
+<img/hist_example1.png, id=249, 421.575pt x 316.18124pt>
+File: img/hist_example1.png Graphic file (type png)
+<use img/hist_example1.png>
+Package pdftex.def Info: img/hist_example1.png  used on input line 404.
+(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
 <img/hist_example2.png, id=250, 421.575pt x 316.18124pt>
 File: img/hist_example2.png Graphic file (type png)
 <use img/hist_example2.png>
@@ -756,58 +756,58 @@ Package pdftex.def Info: img/onlyRules.png  used on input line 426.
 (pdftex.def)             Requested size: 321.82654pt x 86.94962pt.
  [16 <./img/hist_example3.png (PNG copy)> <./img/onlyRules.png>]
 Chapter 4.
-<img/trainingCnnTwoClasses.png, id=271, 1294.8375pt x 685.8122pt>
+<img/trainingCnnTwoClasses.png, id=274, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnTwoClasses.png Graphic file (type png)
 <use img/trainingCnnTwoClasses.png>
-Package pdftex.def Info: img/trainingCnnTwoClasses.png  used on input line 453.
+Package pdftex.def Info: img/trainingCnnTwoClasses.png  used on input line 455.
 
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnTwoClasses_afterSelection.png, id=273, 1294.8375pt x 685.8122pt
+<img/trainingCnnTwoClasses_afterSelection.png, id=276, 1294.8375pt x 685.8122pt
 >
 File: img/trainingCnnTwoClasses_afterSelection.png Graphic file (type png)
 <use img/trainingCnnTwoClasses_afterSelection.png>
 Package pdftex.def Info: img/trainingCnnTwoClasses_afterSelection.png  used on 
-input line 462.
+input line 464.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
 [17
 
  <./img/trainingCnnTwoClasses.png>]
-<img/trainingCnnFourClasses.png, id=283, 1294.8375pt x 685.8122pt>
+<img/trainingCnnFourClasses.png, id=287, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnFourClasses.png Graphic file (type png)
 <use img/trainingCnnFourClasses.png>
-Package pdftex.def Info: img/trainingCnnFourClasses.png  used on input line 478
+Package pdftex.def Info: img/trainingCnnFourClasses.png  used on input line 480
 .
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnFourClasses_afterSelection.png, id=284, 1294.8375pt x 685.8122p
+<img/trainingCnnFourClasses_afterSelection.png, id=288, 1294.8375pt x 685.8122p
 t>
 File: img/trainingCnnFourClasses_afterSelection.png Graphic file (type png)
 <use img/trainingCnnFourClasses_afterSelection.png>
 Package pdftex.def Info: img/trainingCnnFourClasses_afterSelection.png  used on
- input line 485.
+ input line 487.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
  [18 <./img/trainingCnnTwoClasses_afterSelection.png> <./img/trainingCnnFourCla
 sses.png>] [19 <./img/trainingCnnFourClasses_afterSelection.png>]
-<img/trainingCnnTwoClassesFinalResult.png, id=325, 1294.8375pt x 685.8122pt>
+<img/trainingCnnTwoClassesFinalResult.png, id=329, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnTwoClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnTwoClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnTwoClassesFinalResult.png  used on inpu
-t line 536.
+t line 539.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/trainingCnnFourClassesFinalResult.png, id=326, 1294.8375pt x 685.8122pt>
+<img/trainingCnnFourClassesFinalResult.png, id=330, 1294.8375pt x 685.8122pt>
 File: img/trainingCnnFourClassesFinalResult.png Graphic file (type png)
 <use img/trainingCnnFourClassesFinalResult.png>
 Package pdftex.def Info: img/trainingCnnFourClassesFinalResult.png  used on inp
-ut line 543.
+ut line 546.
 (pdftex.def)             Requested size: 401.39548pt x 212.59958pt.
-<img/confusion_2class.png, id=329, 419.31656pt x 430.60875pt>
+<img/confusion_2class.png, id=333, 419.31656pt x 430.60875pt>
 File: img/confusion_2class.png Graphic file (type png)
 <use img/confusion_2class.png>
-Package pdftex.def Info: img/confusion_2class.png  used on input line 552.
+Package pdftex.def Info: img/confusion_2class.png  used on input line 555.
 (pdftex.def)             Requested size: 293.51958pt x 301.42406pt.
-<img/confusion_4class.png, id=330, 421.575pt x 427.5975pt>
+<img/confusion_4class.png, id=334, 421.575pt x 427.5975pt>
 File: img/confusion_4class.png Graphic file (type png)
 <use img/confusion_4class.png>
-Package pdftex.def Info: img/confusion_4class.png  used on input line 559.
+Package pdftex.def Info: img/confusion_4class.png  used on input line 562.
 (pdftex.def)             Requested size: 295.10048pt x 299.31621pt.
  [20 <./img/trainingCnnTwoClassesFinalResult.png> <./img/trainingCnnFourClasses
 FinalResult.png>] [21 <./img/confusion_2class.png> <./img/confusion_4class.png>
@@ -817,13 +817,13 @@ Package rerunfilecheck Info: File `IntelligentSystemsProjectReport.out' has not
 (rerunfilecheck)             Checksum: 4E96E64C2486DEF05B112F42D789CDBA;1796.
  ) 
 Here is how much of TeX's memory you used:
- 14254 strings out of 479173
- 221322 string characters out of 2854167
+ 14255 strings out of 479173
+ 221334 string characters out of 2854167
  892473 words of memory out of 3000000
- 31534 multiletter control sequences out of 15000+600000
+ 31535 multiletter control sequences out of 15000+600000
  420429 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,8n,79p,823b,1704s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,8n,79p,904b,1704s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecti0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -849,10 +849,10 @@ MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/franc/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/franc/AppData/
 Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/franc
 /AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on IntelligentSystemsProjectReport.pdf (22 pages, 1820934 bytes)
+Output written on IntelligentSystemsProjectReport.pdf (22 pages, 1824928 bytes)
 .
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
+ 817 PDF objects out of 1000 (max. 8388607)
  112 named destinations out of 1000 (max. 500000)
  262 words of extra memory for PDF output out of 10000 (max. 10000000)
 
