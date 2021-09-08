@@ -15,7 +15,7 @@ COL_VALENCE = 2;
 % 1 yes (plot graphs), 0 no (do not plot)
 PLOT_GRAPHS = 0; 
 % Number of repetition for sequentialfs
-repetition_sequentialfs = 5; %5
+repetition_sequentialfs = 5;
 % Number of features of the original dataset
 HOW_MANY_FEATURES = 54;
 % Number of features that I will select
@@ -30,8 +30,6 @@ ONLY_BALANCING = 0;
 
 % load data
 dataset = load("data/biomedical_signals/dataset.mat");
-% it can be useful for debugging in order to see the original dataset
-%original = dataset; 
 dataset = table2array(dataset.dataset);
 
 [howManyRow, ~] = size(dataset);
@@ -99,24 +97,24 @@ possible_values(7) = debug(27,1);
 
 %% Data balancing
 % The algorithm to balance the data is the following: 
-%  1) I augment the samples that belong to the majority class of arousal 
+%  1) I augment the samples that belong to the minority class of arousal 
 % and don't belong to the majority class of valence; and the samples that 
-% belong to the majority class of valence and don't belong to the minority
+% belong to the minority class of valence and don't belong to the majority
 % class of arousal.
-% 2) Then I removed the samples that belong to the majority class of 
+% 2) Then I remove the samples that belong to the majority class of 
 % arousal and don't belong to the minority class of valence; and the
 % samples that belong to the majority class of valence and don't belong to
 % the minority class of arousal.
 %
 % I repeat this two steps rep (i.e. 80) times and for each repetition I
-% compute the new majority and minority classe both for arousal and valence
+% compute the new majority and minority class both for arousal and valence
 rep = 80;
 row_to_check = row_survived;
 
 for k = 1:rep
     for i = 1:row_to_check
         if (dataset_cleaned(i,1)==possible_values(lowest_class_arousal) && dataset_cleaned(i,2)~=possible_values(majority_class_valence)) || (dataset_cleaned(i,1)~=possible_values(majority_class_arousal) && dataset_cleaned(i,2)==possible_values(lowest_class_valence))
-            fprintf(" %i) Sto per perturbare la classe valence:%f e arousal:%f\n",i, dataset_cleaned(i,2), dataset_cleaned(i,1));
+            fprintf(" %i) I am going to aumgent the following class valence:%f and arousal:%f\n",i, dataset_cleaned(i,2), dataset_cleaned(i,1));
             % Selection of i-th row
             row_original = dataset_cleaned(i,:);
             % Augmentation of the i-th row
@@ -134,10 +132,10 @@ for k = 1:rep
         
         if((dataset_cleaned(i,1)==possible_values(majority_class_arousal) && dataset_cleaned(i,2)~=possible_values(lowest_class_valence)) || (dataset_cleaned(i,2)==possible_values(majority_class_valence) && dataset_cleaned(i,1)~=possible_values(lowest_class_arousal)))
             dataset_cleaned(i,:)=[];
-            fprintf(" Sto eliminando la riga %i\n",i);
+            fprintf(" I am removing the row %i\n",i);
         end
     end
-    fprintf(" --- FINE ITERAZIONE %i ---\n",k);
+    fprintf(" --- ITERATION %i ENDS ---\n",k);
     howManySamplesForClass_arousal = groupcounts(dataset_cleaned(:,1));
     howManySamplesForClass_valence = groupcounts(dataset_cleaned(:,2));
 
@@ -186,35 +184,35 @@ x_test = features(idxTest, :);
 y_test_aro = target_arousal(idxTest, :);
 y_test_val = target_valence(idxTest, :);
 
-%DECOMMENTARE
+
 % Feature Selection For Valence
-%counter_feat_sel_valence = zeros(HOW_MANY_FEATURES,1)';
-%for i = 1:repetition_sequentialfs
-%    fprintf(" Sequentialfs for valence: repetion %i\n",i);
-%    c_valence = cvpartition(y_train_val, 'k', 10);
-%    opts = statset('Display', 'iter','UseParallel',true);
-%    [features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
+counter_feat_sel_valence = zeros(HOW_MANY_FEATURES,1)';
+for i = 1:repetition_sequentialfs
+    fprintf(" Sequentialfs for valence: repetion %i\n",i);
+    c_valence = cvpartition(y_train_val, 'k', 10);
+    opts = statset('Display', 'iter','UseParallel',true);
+    [features_selected_for_valence, history] = sequentialfs(@myfun, x_train, y_train_val, 'cv', c_valence, 'opt', opts, 'nfeatures', FEATURES_TO_SELECT);
     
-%    for j = 1:HOW_MANY_FEATURES
-%        if features_selected_for_valence(j) == 1
-%            counter_feat_sel_valence(j) = counter_feat_sel_valence(j) + 1;
-%        end
-%    end
+    for j = 1:HOW_MANY_FEATURES
+        if features_selected_for_valence(j) == 1
+            counter_feat_sel_valence(j) = counter_feat_sel_valence(j) + 1;
+        end
+    end
 
-%end
+end
 
-%f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
-%for i = 1:FEATURES_TO_SELECT
+f_sel_valence = zeros(FEATURES_TO_SELECT, 1)';
+for i = 1:FEATURES_TO_SELECT
     % I find the maximum
-%    [~, f_sel_valence(i)] = max(counter_feat_sel_valence);
-%    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_valence(f_sel_valence(i)), f_sel_valence(i)); 
+    [~, f_sel_valence(i)] = max(counter_feat_sel_valence);
+    fprintf(" Il max %f è in posizione (features) %i", counter_feat_sel_valence(f_sel_valence(i)), f_sel_valence(i)); 
     % I set the maximum to zero, thus at the next iteration the second
     % maximum value will be selected
-%    counter_feat_sel_valence(f_sel_valence(i)) = 0;
-%end
+    counter_feat_sel_valence(f_sel_valence(i)) = 0;
+end
 
-%fprintf(" Features Selected For Valence:");
-%disp(f_sel_valence);
+fprintf(" Features Selected For Valence:");
+disp(f_sel_valence);
 
 
 % Features Selection For Arousal
@@ -291,8 +289,7 @@ function mse = myfun(xTrain, yTrain, xTest, yTest)
     xx = xTrain';
     tt = yTrain';
     % train network
-    [net, ~] = train(net, xx, tt);%, 'useParallel', 'yes');
-    %plotregression(tt, xx);
+    [net, ~] = train(net, xx, tt);
     % test network
     y = net(xx);
     mse = perform(net, tt, y);

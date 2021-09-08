@@ -13,10 +13,12 @@ numberOfClasses = 2;
 
 %% Load And Prepare Data
 % Load image from the dataset and prepare it adding labels
+% Experiment 1 - No Selection
 %img_data = imageDatastore('data/img_2classes/NoSelection', ...
 %    'IncludeSubfolders',true, ...
 %    'LabelSource','foldernames');
 
+% Experiment 2 - After images selection
 img_data = imageDatastore('data/img_2classes/Selected', ...
     'IncludeSubfolders',true, ...
     'LabelSource','foldernames');
@@ -37,7 +39,7 @@ original_layers = net.Layers(1:end-3);
 % Now I build the network structure adding to the original layers of the
 % pretrained network other three layers:
 % - A fully connected layer that has as inputs the number of classes and
-%   weight and bias learning rate high
+%   that has weight and bias learning rate high
 % - A softmax layer for classification
 % - A classification layer for the final output
 net_layers = [

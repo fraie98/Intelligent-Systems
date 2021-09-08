@@ -37,6 +37,7 @@ hiddenLayerSize_arousal = 30;
 
 net_arousal = fitnet(hiddenLayerSize_arousal);
 net_arousal.divideParam.trainRatio = 0.7;
+% testRatio = 0 because I will perform the test with the data previously prepared
 net_arousal.divideParam.testRatio = 0;
 net_arousal.divideParam.valRatio = 0.3;
 
@@ -59,7 +60,8 @@ end
 hiddenLayerSize_valence = 35;
 net_valence = fitnet(hiddenLayerSize_valence);
 net_valence.divideParam.trainRatio = 0.7;
-net_valence.divideParam.testRatio = 0;
+% testRatio = 0 because I will perform the test with the data previously prepared
+net_valence.divideParam.testRatio = 0; 
 net_valence.divideParam.valRatio = 0.3;
 
 if TRAIN_NET_VALENCE == 1

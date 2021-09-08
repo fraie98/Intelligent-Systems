@@ -37,7 +37,7 @@ original_layers = net.Layers(1:end-3);
 % Now I build the network structure adding to the original layers of the
 % pretrained network other three layers:
 % - A fully connected layer that has as inputs the number of classes and
-%   weight and bias learning rate high
+%   that has weight and bias learning rate high
 % - A softmax layer for classification
 % - A classification layer for the final output
 net_layers = [
@@ -45,7 +45,7 @@ net_layers = [
     fullyConnectedLayer(numberOfClasses,'WeightLearnRateFactor',20,'BiasLearnRateFactor',20)
     softmaxLayer
     classificationLayer];
-%20
+
 %% Network Training
 pixelRange = [-30 30];
 imageAugmenter = imageDataAugmenter( ...
