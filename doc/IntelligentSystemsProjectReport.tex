@@ -183,7 +183,7 @@
 	
 	\noindent Thus after the extraction of the holdout partition we perform 5 times the \texttt{sequentialfs} for arousal and 5 times for valence. Then we select the first \texttt{FEATURES\_TO\_SELECT} (constant set at the beginning of the script that is 8) features that appear most times in the different runs of sequentialfs, this operation is performed separately for arousal and valence.
 	
-	\noindent It's important to underline the fact that \texttt{sequentialfs} should be repeated a statistically relevant number of times, thus 5 repetitions are not a statistically relevant number of time, anyway is the compromise done in order to maintain an acceptable number of features, an acceptable quality of data and an acceptable time needed for the algorithm (9 hours for valence and 9 hours for arousal with the hardware at disposal).
+	\noindent It's important to underline the fact that \texttt{sequentialfs} should be repeated a statistically relevant number of times, thus 5 repetitions are not a statistically relevant number of times, anyway is the compromise done in order to maintain an acceptable number of features, an acceptable quality of data and an acceptable time needed for the algorithm (9 hours for valence and 9 hours for arousal with the hardware at disposal).
 	
 	\noindent At the end the data obtained are saved into five \texttt{.mat} files:
 	\begin{itemize}
@@ -258,7 +258,7 @@
 		\label{img: fitnet_arousal}
 	\end{figure}
 	
-	%	\vspace{3cm}
+		\vspace{3cm}
 		
 	\begin{figure}[htbp]
 		\centering
@@ -281,18 +281,18 @@
 		\label{img: regression_fitnet_arousal}
 	\end{figure}
 
-\noindent The results obtained are good for both fitnet and RBF: in particulare the regression value is very high and the error is reasonable. An observation for what concern the fitnet that it is possible to done is that the error is quite variable depending on the training, in fact different training give different error values (all reasonable but some are better than others) depending from the starting point on the error surface (the weights assume random values at the beginning of the training).
-
 \newpage
+\noindent The results obtained are good for both fitnet and RBF (for RBF see next section): in particular the regression value is very high and the error is reasonable. An observation for what concern the fitnet that it is possible to done is that the error is quite variable depending on the training, in fact different training give different error values (all reasonable but some are better than others) depending from the starting point on the error surface (the weights assume random values at the beginning of the training).
+
 	\section{RBF}
 	\noindent In this case good results have been achieved with a spread constant equal to 1, then the number of neurons is set in order to achieve the goal that is in both cases of arousal and valence equal to 0.02 (Mean Square Error).
 	
-	\noindent The results of the RBF network for valence are in figure \ref{img: rbf_valence}, \ref{img: regression_rbf_valence}.
+	\noindent The results of the RBF network for valence are in figures \ref{img: rbf_valence}, \ref{img: regression_rbf_valence}.
 	
-	\vspace{1.5cm}
+	%\vspace{1.5cm}
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/rbf_valence.png}
+		\includegraphics[scale=0.8]{img/rbf_valence.png}
 		\caption{Architecture of RBF for valence}
 		\label{img: rbf_valence}
 	\end{figure}
@@ -304,12 +304,12 @@
 		\label{img: regression_rbf_valence}
 	\end{figure}
 \newpage
-	\noindent The results of the RBF network for arousal are in figure \ref{img: rbf_arousal}, \ref{img: regression_rbf_arousal}.
+	\noindent The results of the RBF network for arousal are in figures \ref{img: rbf_arousal}, \ref{img: regression_rbf_arousal}.
 	
 	
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/rbf_arousal.png}
+		\includegraphics[scale=0.8]{img/rbf_arousal.png}
 		\caption{Architecture of RBF for arousal}
 		\label{img: rbf_arousal}
 	\end{figure}
@@ -365,7 +365,7 @@ end
 	
 	\noindent Now I am ready to perform the development of the fuzzy system. The approach used is the one that consist in using the graphical user interface and so the command \texttt{fuzzyLogicDesigner}.
 	
-	\noindent The input variable and their membership functions are the ones shown in figure \ref{img: input1_fuzzy}, \ref{img: input2_fuzzy} and \ref{img: input3_fuzzy}. In figure \ref{img: output_fuzzy} is shown the output function with its membership function.
+	\noindent The input variables and the correspondent membership functions are the ones shown in figure \ref{img: input1_fuzzy}, \ref{img: input2_fuzzy} and \ref{img: input3_fuzzy}. In figure \ref{img: output_fuzzy} is shown the output function with the correspondent membership functions.
 	
 
 	\begin{figure}[htbp]
