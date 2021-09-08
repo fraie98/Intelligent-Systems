@@ -93,11 +93,11 @@
 \chapter*{Introduction}
 	The tasks performed in this project are the following:
 	\begin{itemize}
-		\item \textit{3.1} "Design and develop two MLP artificial neural networks that accurately estimate a person's valence and arousal, respectively" and "two RBF networks that do the same thing as the MPLPs"
+		\item \textit{3.1} Design and develop two MLP artificial neural networks that accurately estimate a person's valence and arousal and two RBF networks that do the same thing as the MLPs.
 		
-		\item \textit{3.3} "Design and develop a fuzzy inference system to fix the deficiencies in the arousal dimension"
+		\item \textit{3.3} Design and develop a fuzzy inference system to estimate a person's arousal.
 		
-		\item \textit{4.2} "Fine-tune a pretrained CNN" to  obtain a "convolutional neural network (CNN) that accurately classifies a person's emotion, based on facial expression."
+		\item \textit{4.2} Fine-tune a pretrained CNN to  obtain a convolutional neural network (CNN) that accurately classifies a person's emotion, based on facial expression.
 	\end{itemize}
 
 	\noindent The dataset at our disposal are two, one for tasks \textit{3.1} and \textit{3.3} and another one for task \textit{4.2}.
@@ -118,16 +118,16 @@
 	\end{itemize}
 	\noindent All the procedure is contained in the file \texttt{/matlab/data.m}. The first two steps are performed thanks two matlab functions:
 	\begin{itemize}
-		\item \texttt{isinf(A)} that given a matrix returns a logic matrix is indicated if the correspondent element of the input matrix are infinite ($1$) or not ($0$) 
+		\item \texttt{isinf(A)} that given a matrix returns a logic matrix where is indicated if the correspondent element of the input matrix are infinite ($1$) or not ($0$) 
 		
-		\item \texttt{rmoutliers(dataset, method)} that given a dataset remove the outliers found using the method specified in input that is 'median' by default (i.e. "Outliers are defined as elements more than three scaled MAD from the median. The scaled MAD is defined as $c\times median(abs(A-median(A))$")
+		\item \texttt{rmoutliers(dataset, method)} that given a dataset remove the outliers found using the method specified in input that is 'median' by default (i.e. "Outliers are defined as elements more than three scaled MAD from the median. The scaled MAD is defined as $c\times median(abs(A-median(A))$"\footnote{From Matlab documentation}).
 	\end{itemize} 
 	
 	\noindent Then after the first two steps there are the most interesting part: data balancing and features selection.
 	
 	\newpage
 	\section{Data Balancing}
-	\noindent The dataset is composed by samples and each sample contains biomedical signals: to each set of biomedical signals (that we will call \textit{features}) correspond a value for arousal and a value for valence. The possible values are 7 ($1,\; 2.\bar3,\; 3.\bar6,\; 5,\; 6.\bar3,\; 7.\bar6,\; 9$), thus we can divide the dataset according 7 class for arousal and valence. The distribution of the samples among the classes is represented in the histograms in figure \ref{beforeBalancingArousal} and \ref{beforeBalancingValence}.
+	\noindent The dataset is composed by samples and each sample contains biomedical signals: to each different set composed by 54 biomedical signals (that we will call \textit{features}) correspond a value for arousal and a value for valence. The possible values are 7 ($1,\; 2.\bar3,\; 3.\bar6,\; 5,\; 6.\bar3,\; 7.\bar6,\; 9$), thus we can divide the dataset according 7 class for arousal and valence. The distribution of the samples among the classes is represented in the histograms in figure \ref{beforeBalancingArousal} and \ref{beforeBalancingValence}.
 	
 	\begin{figure}[htpb]
 		\centering
@@ -148,9 +148,9 @@
 
 \noindent The steps are the following:
 \begin{enumerate}
-	\item I augment the samples that belong to the majority class of arousal 
+	\item I augment the samples that belong to the minority class of arousal 
 	 and don't belong to the majority class of valence and viceversa (i.e. the samples that 
-	 belong to the majority class of valence and don't belong to the minority
+	 belong to the minority class of valence and don't belong to the majority
 	 class of arousal).
 	 
 	 \item I remove the samples that belong to the majority class of 
@@ -158,7 +158,7 @@
 	 samples that belong to the majority class of valence and don't belong to
 	 the minority class of arousal).
 	
-	 \item I repeat steps 1 and 2 for a $n=80$ ($80$ after some experiments this is the number that gives the best results) times and for each repetition I compute the new majority and minority class both for arousal and valence.
+	 \item I repeat steps 1 and 2 for a $n=80$ (after some experiments is possible to conclude that $80$ is the number that gives the best results) times and for each repetition I compute the new majority and minority class both for arousal and valence.
 	 
 \end{enumerate}
 
@@ -179,17 +179,17 @@
 	\end{figure}
 	
 	\section{Features Selection}
-	\noindent Before the features selection is necessary to divide the data in two set: one for training and one for test. This is very important because if we use all the data to perform feature selection we have a bias because the test data have been already seen by the network.
+	\noindent Before the features selection is necessary to divide the data in two set: one for training and one for test. This is very important because if we use all the data to perform features selection we have a bias because the test data have been already seen by the network.
 	
 	\noindent Thus after the extraction of the holdout partition we perform 5 times the \texttt{sequentialfs} for arousal and 5 times for valence. Then we select the first \texttt{FEATURES\_TO\_SELECT} (constant set at the beginning of the script that is 8) features that appear most times in the different runs of sequentialfs, this operation is performed separately for arousal and valence.
 	
 	\noindent It's important to underline the fact that \texttt{sequentialfs} should be repeated a statistically relevant number of times, thus 5 repetitions are not a statistically relevant number of time, anyway is the compromise done in order to maintain an acceptable number of features, an acceptable quality of data and an acceptable time needed for the algorithm (9 hours for valence and 9 hours for arousal with the hardware at disposal).
 	
-	\noindent At the end we save the data obtained into five \texttt{.mat} files:
+	\noindent At the end the data obtained are saved into five \texttt{.mat} files:
 	\begin{itemize}
 		\item \texttt{/matlab/data/biomedical\_signals/dataset\_cleaned.mat}
 		
-		\noindent It contains the entire dataset without infinite values, outliers and with balanced class distribution.
+		\noindent It contains the entire dataset without infinite values, outliers and with balanced classes distributions.
 		
 		\item \texttt{/matlab/data/biomedical\_signals/training\_data\_valence.mat}
 		
@@ -206,6 +206,10 @@
 		\item \texttt{/matlab/data/biomedical\_signals/test\_data\_valence.mat}
 		
 		\noindent It contains a \texttt{struct} with the test input (only the selected features) and the correspondent expected output for valence.
+		
+		\item \texttt{/matlab/data/biomedical\_signals/fuzzyData.mat}
+		
+		\noindent It contains all the data needed by the fuzzy inference system.
 	\end{itemize}
 
 	\noindent The division of training data and test data in two files, one for valence and one for arousal, is done only for practical reasons, in fact the repetitions of sequentialfs has been performed only for arousal and only for valence separately due to the time needed.
@@ -213,8 +217,8 @@
 \chapter{Neural Networks}
 	\noindent In this chapter we will see two types of neural networks that resolve the same problem, that is to estimate the values of arousal and valence given a set of biomedical signals.	
 	\section{Fitnet}
-	\noindent The fitnet achieve good results with the default parameters, other tests have been performed in order to asses the number of neurons, at the 35 and 30 are the numbers that ensure good results and a low number of neurons.
-	In figures \ref{img: fitnet_valence}, \ref{img: perf_fitnet_valence}, \ref{img: errorhist_fitnet_valence}, \ref{img: regression_fitnet_valence} there are the results of the training of the fitnet using for estimate valence.
+	\noindent After some experiments it has been obtained that the fitnet achieve good results with the default parameters, then after other tests performed in order to asses the number of neurons, the result was that 35 and 30 are the numbers that ensure good results with a low number of neurons.
+	In figures \ref{img: fitnet_valence}, \ref{img: perf_fitnet_valence}, \ref{img: errorhist_fitnet_valence}, \ref{img: regression_fitnet_valence} there are the results of the training of the fitnet using to estimate valence.
 		\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.8]{img/fitnet_valence.png}
@@ -243,7 +247,7 @@
 		\label{img: regression_fitnet_valence}
 	\end{figure}
 	
-	\noindent From the figures it is possible to infer that the regression value is very high and also the error is low.
+	%\noindent From the figures it is possible to infer that the regression value is very high and also the error is low.
 	
 	\noindent In figures \ref{img: fitnet_arousal}, \ref{img: perf_fitnet_arousal}, \ref{img: errorhist_fitnet_arousal}, \ref{img: regression_fitnet_arousal} there are the results of the training of the fitnet using for estimate arousal.
 	\vspace{1cm}
@@ -276,6 +280,8 @@
 		\caption{Regression of fitnet for arousal}
 		\label{img: regression_fitnet_arousal}
 	\end{figure}
+
+\noindent The results obtained are good for both fitnet and RBF: in particulare the regression value is very high and the error is reasonable. An observation for what concern the fitnet that it is possible to done is that the error is quite variable depending on the training, in fact different training give different error values (all reasonable but some are better than others) depending from the starting point on the error surface (the weights assume random values at the beginning of the training).
 
 \newpage
 	\section{RBF}
@@ -316,7 +322,17 @@
 	\end{figure}
 	
 \chapter{Fuzzy Inference System}
-	\noindent In order to develop a fuzzy inference system to estimate the values of arousal an analysis of the 3 best features selected by running 5 times the sequentialfs algorithm (the reason behind the choice of this number is the same explained in the introduction). This analysis is performed by the script \texttt{matlab/analysis\_for\_fis.m}.
+	\noindent In order to develop a fuzzy inference system to estimate the values of arousal an analysis of the 3 best features selected by running 5 times the sequentialfs algorithm (the reason behind the choice of this number is the same explained in the introduction). This analysis is performed by the script \texttt{matlab/analysis\_for\_fis.m}. The other files of this task are:
+	\begin{itemize}
+		\item \texttt{matlab/FIS\_arousal.fis}
+		
+		\noindent It contains the Fuzzy Inference System developed through the fuzzy logic designer.
+		
+		\item \texttt{matlab/fis\_evaluation.m}
+		
+		\noindent It is the script used to evaluate the system performance through \texttt{evalfis}.		
+\end{itemize}
+	
 	
 	\noindent As first thing we have to fix the universe of discourse of the three features, in order to do so we look for the maximum and the minimum value for each feature, the results are the following:
 	\begin{itemize}
@@ -325,7 +341,9 @@
 		\item Feature 37: $[-0.064933, 0.034879]$
 	\end{itemize}
 	
-	\noindent Then we have to check how many samples that has a low/medium/high output correspond to the different values of a particular feature. In order to do so we have to fix the meaning of low, medium and high output. As we have seen the possible values of the arousal/valence can be divided in 7 class, in the code we have considered a vector with the seven values and the we access this vector giving the class, thanks to this we deal with classes and not with the exact value. This is important in order to understand the following code:
+	\noindent Then we have to check how many samples that has a low/medium/high output correspond to the different values of a particular feature. In order to do so we have to fix the meaning of low, medium and high output.
+	
+	\noindent As we have seen the possible values of the arousal/valence can be divided in 7 class, in the code we have considered a vector with the seven values and the we access this vector giving the class, thanks to this we deal with classes and not with the exact value. This is important in order to understand the following code:
 	\begin{lstlisting}[language=Matlab]
 y_level_low = find(y_train==y_values(1) | y_train==y_values(2));
 y_level_medium = find(
@@ -349,38 +367,69 @@ end
 	
 	\noindent The input variable and their membership functions are the ones shown in figure \ref{img: input1_fuzzy}, \ref{img: input2_fuzzy} and \ref{img: input3_fuzzy}. In figure \ref{img: output_fuzzy} is shown the output function with its membership function.
 	
+
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/input1_fuzzy.png}
+		\includegraphics[scale=0.6]{img/input1_fuzzy.png}
 		\caption{Feature 24}
 		\label{img: input1_fuzzy}
 	\end{figure}
 
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/input2_fuzzy.png}
+		\includegraphics[scale=0.6]{img/input2_fuzzy.png}
 		\caption{Feature 27}
 		\label{img: input2_fuzzy}
 	\end{figure}
 
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/input3_fuzzy.png}
+		\includegraphics[scale=0.6]{img/input3_fuzzy.png}
 		\caption{Feature 37}
 		\label{img: input3_fuzzy}
 	\end{figure}
 
 	\begin{figure}[htbp]
 		\centering
-		\includegraphics[scale=1]{img/output_fuzzy.png}
+		\includegraphics[scale=0.6]{img/output_fuzzy.png}
 		\caption{Output}
 		\label{img: output_fuzzy}
 	\end{figure}
 	
+	\noindent The rules and also the membership functions for each features, have been written thanks to the histogram plotted in the analysis phase, a subset of the histograms are the ones in figures \ref{img: hist_example1}, \ref{img: hist_example2} and \ref{img: hist_example3} that show how many samples with low, medium or high values of output correspond to the different values of feature 24. Then in figure \ref{img: rules} it is possible to see the different rules.
 	
-	\noindent The rules have been written thanks to the histogram plotted in the analysis phase, in order to understand let make an example.
+		
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.7]{img/hist_example1.png}
+		\caption{Histogram that represents the number of samples that have a low arousal value and their distribution among the different values of feature 24.}
+		\label{img: hist_example1}
+	\end{figure}
+
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.7]{img/hist_example2.png}
+		\caption{Histogram that represents the number of samples that have a medium arousal value and their distribution among the different values of feature 24.}
+		\label{img: hist_example2}
+	\end{figure}
+
+\newpage
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.7]{img/hist_example3.png}
+		\caption{Histogram that represents the number of samples that have an high arousal value and their distribution among the different values of feature 24.}
+		\label{img: hist_example3}
+	\end{figure}
 	
-	\noindent ESEMPIO DI UNA REGOLA E METTERE UN ISTOGRAMMA
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=1.5]{img/onlyRules.png}
+		\caption{Fuzzy Rules}
+		\label{img: rules}
+	\end{figure}
+
+	\noindent In order to understand the reasoning behind the rule let make an example. We take into account the rule number 3 i.e. \texttt{"If (Feature24 is high) then (arousal is low)"}, we can see that we can infer this rule analyzing the three graphs (figures \ref{img: hist_example1}, \ref{img: hist_example2}, \ref{img: hist_example3}), in fact the arousal feature 24 is high more or less for values greater than 0.5 (figure \ref{img: input1_fuzzy}) and for this values there are no sample for what deal with the medium and high outputs instead there are values for low outputs. This means that if the feature 24 has values more or less greater or equal than 0.5 (so it assume high values) then the arousal is low. So we have inferred the fuzzy rule 3.
+	
 	
 	
 	
